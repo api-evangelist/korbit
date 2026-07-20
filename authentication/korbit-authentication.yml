@@ -1,0 +1,20 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/korbit-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: KorbitApiKey
+  type: apiKey
+  in: header
+  parameter: X-KAPI-KEY
+  description: API key issued in the Korbit Developers portal (https://developers.korbit.co.kr).
+    Keys carry permissions (readOrders, writeOrders, readBalances, readDeposits, writeDeposits,
+    readWithdrawals, writeWithdrawals), may be pinned to an IP allowlist, and are valid for
+    one year. Every signed request additionally carries `timestamp` and `signature` parameters
+    (HMAC-SHA256 hex or ED25519 base64).
+  sources:
+  - openapi/korbit-openapi.yml
