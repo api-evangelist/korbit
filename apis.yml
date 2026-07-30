@@ -1,27 +1,219 @@
 aid: korbit
 name: Korbit
-description: 'Korbit is a company surfaced as a portfolio company of pantera-capital and added to the
-  API Evangelist network as a stub for enrichment. Sector: crypto. This profile is a lead awaiting the
-  enrichment pipeline.'
+description: 'Korbit is South Korea''s first cryptocurrency exchange, founded in 2013 and headquartered
+  in Seoul, offering KRW-denominated spot trading of bitcoin, ether and other digital assets to Korean
+  retail and institutional customers. Korbit publishes the Korbit Open API v2, a REST and WebSocket
+  interface covering market data (tickers, orderbook, trades, candlesticks, tick-size policy), order
+  placement and cancellation, order and trade history, balances, cryptocurrency deposit-address
+  management and withdrawals, and KRW deposit/withdrawal push notifications. Authentication is by API
+  key (X-KAPI-KEY) with per-request HMAC-SHA256 or ED25519 signatures, granular key permissions and
+  optional IP allowlisting. Korbit is unusually agent-forward for an exchange: it ships an official Go
+  CLI with a bundled MCP server and Agent Skill, a documented llms.txt, and a downloadable local
+  sandbox that mocks the full REST and WebSocket surface for no-risk development.'
 url: https://raw.githubusercontent.com/api-evangelist/korbit/refs/heads/main/apis.yml
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://www.korbit.co.kr/apple-touch-icon.png
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - pantera-capital
-x-tier: stub
-x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-19'
 tags:
 - Company
 - Crypto
-apis: []
+- Cryptocurrency Exchange
+- Digital Assets
+- Trading
+- Market Data
+- Financial Services
+- WebSocket
+- South Korea
+- Blockchain
+apis:
+- aid: korbit:korbit-open-api-v2-websocket
+  name: Korbit Open API v2 WebSocket
+  description: >-
+    WebSocket streaming API for the Korbit exchange. Public channels stream ticker, orderbook and trade
+    market data; private channels stream the authenticated account's order, trade and balance changes.
+    Private connections sign exactly like REST, with timestamp and signature in the query string and X-KAPI-KEY
+    in the connection header.
+  humanURL: https://docs.korbit.co.kr/
+  baseURL: wss://ws-api.korbit.co.kr/v2/public
+  tags:
+  - Streaming
+  - Market Data
+  - WebSocket
+  properties:
+  - type: AsyncAPI
+    url: asyncapi/korbit-websocket-asyncapi.yml
+  - type: Documentation
+    url: https://docs.korbit.co.kr/
+- aid: korbit:korbit-asset-api
+  name: Korbit Asset API
+  description: The Asset API from Korbit — 1 operation(s) for asset.
+  humanURL: https://docs.korbit.co.kr/
+  baseURL: https://api.korbit.co.kr
+  tags:
+  - Asset
+  properties:
+  - type: OpenAPI
+    url: openapi/korbit-asset-api-openapi.yml
+  - type: Documentation
+    url: https://docs.korbit.co.kr/
+- aid: korbit:korbit-deposit-crypto-api
+  name: Korbit Deposit (Crypto) API
+  description: The Deposit (Crypto) API from Korbit — 3 operation(s) for deposit (crypto).
+  humanURL: https://docs.korbit.co.kr/
+  baseURL: https://api.korbit.co.kr
+  tags:
+  - Deposit (Crypto)
+  properties:
+  - type: OpenAPI
+    url: openapi/korbit-deposit-crypto-api-openapi.yml
+  - type: Documentation
+    url: https://docs.korbit.co.kr/
+- aid: korbit:korbit-deposit-withdrawal-krw-api
+  name: Korbit Deposit/Withdrawal (KRW) API
+  description: >-
+    The Deposit/Withdrawal (KRW) API from Korbit — 4 operation(s) for deposit/withdrawal (krw).
+  humanURL: https://docs.korbit.co.kr/
+  baseURL: https://api.korbit.co.kr
+  tags:
+  - Deposit/Withdrawal (KRW)
+  properties:
+  - type: OpenAPI
+    url: openapi/korbit-deposit-withdrawal-krw-api-openapi.yml
+  - type: Documentation
+    url: https://docs.korbit.co.kr/
+- aid: korbit:korbit-other-api
+  name: Korbit Other API
+  description: The Other API from Korbit — 8 operation(s) for other.
+  humanURL: https://docs.korbit.co.kr/
+  baseURL: https://api.korbit.co.kr
+  tags:
+  - Other
+  properties:
+  - type: OpenAPI
+    url: openapi/korbit-other-api-openapi.yml
+  - type: Documentation
+    url: https://docs.korbit.co.kr/
+- aid: korbit:korbit-quotation-api
+  name: Korbit Quotation API
+  description: The Quotation API from Korbit — 6 operation(s) for quotation.
+  humanURL: https://docs.korbit.co.kr/
+  baseURL: https://api.korbit.co.kr
+  tags:
+  - Quotation
+  properties:
+  - type: OpenAPI
+    url: openapi/korbit-quotation-api-openapi.yml
+  - type: Documentation
+    url: https://docs.korbit.co.kr/
+- aid: korbit:korbit-trading-api
+  name: Korbit Trading API
+  description: The Trading API from Korbit — 4 operation(s) for trading.
+  humanURL: https://docs.korbit.co.kr/
+  baseURL: https://api.korbit.co.kr
+  tags:
+  - Trading
+  properties:
+  - type: OpenAPI
+    url: openapi/korbit-trading-api-openapi.yml
+  - type: Documentation
+    url: https://docs.korbit.co.kr/
+- aid: korbit:korbit-withdrawal-crypto-api
+  name: Korbit Withdrawal (Crypto) API
+  description: The Withdrawal (Crypto) API from Korbit — 3 operation(s) for withdrawal (crypto).
+  humanURL: https://docs.korbit.co.kr/
+  baseURL: https://api.korbit.co.kr
+  tags:
+  - Withdrawal (Crypto)
+  properties:
+  - type: OpenAPI
+    url: openapi/korbit-withdrawal-crypto-api-openapi.yml
+  - type: Documentation
+    url: https://docs.korbit.co.kr/
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: DomainSecurity
+  url: security/korbit-domain-security.yml
+- type: AgenticAccess
+  url: agentic-access/korbit-agentic-access.yml
+- type: Authentication
+  url: authentication/korbit-authentication.yml
 - type: Website
   url: https://www.korbit.co.kr/
+- type: DeveloperPortal
+  url: https://developers.korbit.co.kr
+- type: Documentation
+  url: https://docs.korbit.co.kr/
+- type: APIReference
+  url: https://docs.korbit.co.kr/
+- type: GettingStarted
+  url: https://docs.korbit.co.kr/llms/en/introduction.md
+- type: Blog
+  url: https://blog.naver.com/korbit_official
+- type: GitHubOrganization
+  url: https://github.com/korbit-official
+- type: SignUp
+  url: https://developers.korbit.co.kr
+- type: LLMsTxt
+  url: llms/korbit-llms.txt
+- type: OpenAPI
+  url: openapi/korbit-openapi.yml
+- type: AsyncAPI
+  url: asyncapi/korbit-websocket-asyncapi.yml
+- type: Webhooks
+  url: asyncapi/korbit-websocket-asyncapi.yml
+- type: Packages
+  url: packages/korbit-packages.yml
+- type: SDKs
+  url: packages/korbit-packages.yml
+- type: CLI
+  url: cli/korbit-cli.yml
+- type: MCPServer
+  url: mcp/korbit-mcp.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Sandbox
+  url: sandbox/korbit-sandbox.yml
+- type: Conventions
+  url: conventions/korbit-conventions.yml
+- type: Idempotency
+  url: conventions/korbit-conventions.yml
+- type: ErrorCatalog
+  url: errors/korbit-error-codes.yml
+- type: RateLimits
+  url: rate-limits/korbit-rate-limits.yml
+- type: Lifecycle
+  url: lifecycle/korbit-lifecycle.yml
+- type: Conformance
+  url: conformance/korbit-conformance.yml
+- type: DataModel
+  url: data-model/korbit-data-model.yml
+- type: WellKnown
+  url: well-known/korbit-well-known.yml
+- type: Overlay
+  url: overlays/korbit-openapi-overlay.yaml
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence
