@@ -1,0 +1,67 @@
+generated: '2026-07-19'
+method: searched
+source: https://docs.korbit.co.kr/llms-full.txt
+versioning:
+  scheme: uri-path
+  current: v2
+  example: https://api.korbit.co.kr/v2/tickers
+  docs: https://docs.korbit.co.kr/
+  note: >-
+    Every REST path and both WebSocket endpoints are namespaced under /v2. Korbit publishes no
+    header-based or date-based version negotiation.
+deprecation:
+  policy_url: null
+  sunset_header: false
+  deprecation_header: false
+  rfc8594: false
+  note: >-
+    Korbit publishes no deprecation policy and documents no Sunset or Deprecation response headers.
+    No operation in the published reference is marked deprecated.
+deprecated_operations: []
+sla:
+  url: null
+  uptime_target: null
+  note: No published SLA or uptime commitment was found for the Open API.
+status_page:
+  url: null
+  note: >-
+    No status page was found. status.korbit.co.kr does not resolve. The closest published signal is
+    in-API: GET /v2/notices returns the 20 most recent Korbit notices (announcements), and
+    GET /v2/marketAlerts returns the current Market Warning System (시장경보제) status per trading
+    pair.
+in_api_announcements:
+- operation: getNotices
+  path: GET /v2/notices
+  description: The 20 most recent Korbit notices (announcements), most recent first.
+- operation: getMarketAlerts
+  path: GET /v2/marketAlerts
+  description: >-
+    Current market alert (Market Warning System) status for each trading pair. Returns only pairs
+    that currently have active alerts.
+changelog:
+  url: null
+  note: >-
+    No dated public changelog for the Open API was found; no changelog/ artifact is recorded rather
+    than fabricate one. The official CLI is versioned separately — the Go module proxy lists
+    korbit-cli v1.0.0.
+credential_lifecycle:
+  api_key_validity: one year from creation
+  rotation_note: >-
+    Keys expire one year after creation and must be recreated in the Developers portal. Permission
+    and IP-allowlist changes can take up to about one minute to propagate.
+data_retention_windows:
+- operation: getAllOrders
+  window: Orders created within the last 36 hours
+- operation: getMyTrades
+  window: Trade history from the past 36 hours
+- subject: clientOrderId reuse
+  window: >-
+    Approximately three days after an order has closed; orders with status expired or canceled
+    cannot be searched by clientOrderId.
+stability_notes:
+- >-
+  korbit-cli's scripting hooks for building a streaming bot are documented as experimental and may
+  change; Korbit advises against building long-lived bots on them.
+related:
+  conventions: conventions/korbit-conventions.yml
+  cli: cli/korbit-cli.yml

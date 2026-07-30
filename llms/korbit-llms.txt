@@ -1,0 +1,53 @@
+# Korbit Open API
+
+> Korbit cryptocurrency exchange Open API v2 documentation, optimized for AI coding agents. Covers REST and WebSocket endpoints for quotation, trading, balances, and crypto/KRW deposits and withdrawals.
+
+한국어 색인 (Korean index): [/llms/ko/index.md](/llms/ko/index.md)
+
+## Choose your integration path
+
+There are two ways to integrate, and for an agent one is much lower-risk:
+
+- **Official CLI (recommended for most agents).** [korbit-cli](https://github.com/korbit-official/korbit-cli) is a single static binary that exposes every Korbit endpoint with request signing, idempotent order placement, auto-retry of idempotent calls, clock-sync, and a local action journal already handled for you. Drive it by shelling out to its commands (pass `--json`; run `korbit commands --json` for the full machine-readable catalog of commands, flags, enums, and exit codes), or by running its MCP server (`korbit mcp serve`) to expose the API as tools to an MCP host (Codex, Claude Desktop, Claude Code, and others). It bundles a `korbit` Agent Skill (installable for Claude or Codex) with the safe workflow and safety rules. See the [CLI guide](/llms/en/cli.md) to install and drive it; quickstart and full command reference: https://github.com/korbit-official/korbit-cli
+- **Build your own client.** Use the REST/WebSocket reference below with the signing helpers and resilience recipes in the bundle — read on.
+
+## Build your own client
+
+The official CLI above is open source and can be cloned (https://github.com/korbit-official/korbit-cli) as a reference implementation — but use the reference below first, and consult that source only when you hit a specific issue or need deeper insight, since it is a large codebase.
+
+Two ways to read the reference:
+
+- **One fetch**: a single-file bundle contains the agent guide (base URLs, signing rules, HMAC and ED25519 helpers, resilience recipes, a safe-bot checklist) plus the complete parameter/response/example spec for every endpoint — nothing else needs to be fetched.
+- **Selective**: every file is indexed below with exactly which endpoints it covers, so fetch only what the task needs.
+
+## Single-file bundle
+
+- [llms-full.md](/llms/en/llms-full.md): the complete bundle in English (also served at the site root as /llms-full.txt).
+
+## Reference (per-domain files)
+
+- [introduction.md](/llms/en/introduction.md): integration paths (CLI vs build-your-own), agent instructions, base URLs, API keys and permissions.
+- [rest_api.md](/llms/en/rest_api.md): REST request and signing rules, HMAC/ED25519 helpers, order sizing, reading orders, balances, plus the endpoint/status/error overview.
+- [rest_api/quotation.md](/llms/en/rest_api/quotation.md): Quotation — `GET /v2/tickers`, `GET /v2/orderbook`, `GET /v2/trades`, `GET /v2/candles`, `GET /v2/currencyPairs`, `GET /v2/tickSizePolicy`
+- [rest_api/trading.md](/llms/en/rest_api/trading.md): Trading — `GET /v2/orders`, `GET /v2/openOrders`, `GET /v2/allOrders`, `GET /v2/myTrades`, `POST /v2/orders`, `DELETE /v2/orders`
+- [rest_api/asset.md](/llms/en/rest_api/asset.md): Asset — `GET /v2/balance`
+- [rest_api/deposit-crypto.md](/llms/en/rest_api/deposit-crypto.md): Deposit (Crypto) — `GET /v2/coin/depositAddresses`, `GET /v2/coin/depositAddress`, `POST /v2/coin/depositAddress`, `GET /v2/coin/recentDeposits`, `GET /v2/coin/deposit`
+- [rest_api/withdrawal-crypto.md](/llms/en/rest_api/withdrawal-crypto.md): Withdrawal (Crypto) — `GET /v2/coin/withdrawableAddresses`, `GET /v2/coin/withdrawableAmount`, `POST /v2/coin/withdrawal`, `DELETE /v2/coin/withdrawal`, `GET /v2/coin/recentWithdrawals`, `GET /v2/coin/withdrawal`
+- [rest_api/krw.md](/llms/en/rest_api/krw.md): Deposit/Withdrawal (KRW) — `POST /v2/krw/sendKrwDepositPush`, `POST /v2/krw/sendKrwWithdrawalPush`, `GET /v2/krw/recentDeposits`, `GET /v2/krw/recentWithdrawals`
+- [rest_api/other.md](/llms/en/rest_api/other.md): Other Endpoints — `GET /v2/currencies`, `GET /v2/time`, `GET /v2/tradingFeePolicy`, `GET /v2/currentKeyInfo`, `GET /v2/notices`, `GET /v2/marketAlerts`
+- [resilience.md](/llms/en/resilience.md): resilience & safety recipes — idempotent placement, lost-response reconciliation, decimal-safe sizing.
+- [websocket_api.md](/llms/en/websocket_api.md): connection, authentication, message format, plus a channel overview.
+- [websocket_api/public.md](/llms/en/websocket_api/public.md): Public Type — channels `ticker`, `orderbook`, `trade`
+- [websocket_api/private.md](/llms/en/websocket_api/private.md): Private Type — channels `myOrder`, `myTrade`, `myAsset`
+- [examples.md](/llms/en/examples.md): worked end-to-end bot examples.
+- [cli.md](/llms/en/cli.md): building with the official korbit-cli — CLI commands, MCP server, and the bundled Skill.
+- [sandbox.md](/llms/en/sandbox.md): the local sandbox (mock API) for testing a bot with no real money.
+- [disclaimer.md](/llms/en/disclaimer.md): terms of use and limitation of liability — provided AS-IS, with no warranty.
+
+## Sandbox
+
+- [korbit-sandbox.mjs](/korbit-sandbox.mjs): a single-file, zero-dependency mock of the Korbit Open API v2 (REST + WebSocket). Run it with Node (`node korbit-sandbox.mjs init-db && node korbit-sandbox.mjs run`) and point your bot's base URL at http://127.0.0.1:9999 to test end-to-end with no real money or account. See the "Local Sandbox" section of the single-file bundle.
+
+## Optional
+
+- [Developers portal](https://developers.korbit.co.kr): API key management, signing examples, and FAQ (not in Markdown form).

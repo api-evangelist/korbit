@@ -1,0 +1,26 @@
+{
+  "provider": "korbit",
+  "sources": [
+    "korbit-asset-api-openapi.yml",
+    "korbit-deposit-crypto-api-openapi.yml",
+    "korbit-deposit-withdrawal-krw-api-openapi.yml",
+    "korbit-other-api-openapi.yml",
+    "korbit-quotation-api-openapi.yml",
+    "korbit-trading-api-openapi.yml",
+    "korbit-withdrawal-crypto-api-openapi.yml"
+  ],
+  "outputs": [
+    "korbit-asset-api-openapi.yml",
+    "korbit-deposit-crypto-api-openapi.yml",
+    "korbit-deposit-withdrawal-krw-api-openapi.yml",
+    "korbit-other-api-openapi.yml",
+    "korbit-quotation-api-openapi.yml",
+    "korbit-trading-api-openapi.yml",
+    "korbit-withdrawal-crypto-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

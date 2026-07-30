@@ -1,0 +1,121 @@
+generated: '2026-07-19'
+method: searched
+source: https://docs.korbit.co.kr/llms/en/sandbox.md
+name: Korbit local sandbox
+kind: self-hosted-mock
+description: >-
+  A single self-contained Node.js file that mocks the full Korbit Open API v2 — REST plus public and
+  private WebSocket — on a local port, so a client can be built and tested with no real money and no
+  real account. It uses the same request format and signing rules as production, so the same client
+  code can target both. It is explicitly a mock, not a Korbit-hosted test environment: matching,
+  pricing, fills and timing differ from the real exchange and only common paths are implemented.
+hosted_by_provider: false
+download:
+  url: https://docs.korbit.co.kr/korbit-sandbox.mjs
+  command: curl -O https://docs.korbit.co.kr/korbit-sandbox.mjs
+  requires: Node.js 24 or newer
+  dependencies: none
+run:
+- command: node korbit-sandbox.mjs init-db
+  description: Initialize the database once. Prints the demo user's API key id and secrets.
+- command: node korbit-sandbox.mjs run
+  description: Start the server. Prints the REST base URL and the two WebSocket URLs on startup.
+- command: node korbit-sandbox.mjs status
+  description: Re-view the test credentials and each pair's current mode at any time.
+- command: node korbit-sandbox.mjs license
+  description: Read the full sandbox terms.
+- command: node korbit-sandbox.mjs help
+  description: Full command detail.
+via_cli:
+  command: korbit sandbox start
+  paper: korbit sandbox start --paper --fresh
+  note: >-
+    korbit-cli runs the same sandbox in one step. --fresh wipes the database each start; omit it to
+    restart an existing paper sandbox keeping balances and orders. --all-pairs seeds every launched
+    production pair from a live snapshot (cached beside the database after the first start).
+endpoints:
+  rest: http://127.0.0.1:9999
+  websocket_public: ws://127.0.0.1:9999/v2/public
+  websocket_private: ws://127.0.0.1:9999/v2/private
+test_credentials:
+  published_values: false
+  mechanism: >-
+    The sandbox provisions a demo user and prints its API key id and secrets — one HMAC key and one
+    Ed25519 key — when the database is initialized. They are generated locally per install, so there
+    are no fixed published test credentials to record here. Re-view them with
+    `node korbit-sandbox.mjs status`.
+  suggested_env_vars:
+  - KORBIT_API_KEY
+  - KORBIT_API_SECRET
+  warning: Sandbox-only. Never reuse them anywhere real and never hard-code them.
+test_vs_live_separation:
+  mechanism: base-url
+  note: >-
+    There is no test-key prefix or account mode on production Korbit. Test and live are separated by
+    pointing the client's BASE_URL (and WebSocket URLs) at the local sandbox instead of
+    api.korbit.co.kr. Korbit's guidance is to test against the sandbox first and only switch the
+    base URL to production once the user explicitly enables live trading.
+scenario_controls:
+- command: node korbit-sandbox.mjs set-balance --user 1 --currency btc --available 5
+  description: Set a balance to drive a specific path (e.g. insufficient-balance rejections).
+- command: node korbit-sandbox.mjs set-market --symbol btc_krw --price 95000000
+  description: Move a market price.
+- command: node korbit-sandbox.mjs set-market --symbol btc_krw --synthetic off
+  description: >-
+    Pure CLOB mode — orders match only real counterparties, so the bot must place both sides to
+    trade. The published orderbook contains only real resting orders.
+- command: node korbit-sandbox.mjs set-market --symbol btc_krw --synthetic on --price 95000000 --spread 0 --volatility 0
+  description: >-
+    Synthetic overlay (default) with a pinned, predictable fill price. Synthetic maker depth means a
+    lone bot always has a counterparty.
+- command: node korbit-sandbox.mjs init-db --source live
+  description: >-
+    Paper trading — every pair mirrors real production market data (prices, order book, trades)
+    while orders fill locally with simulated settlement.
+- command: node korbit-sandbox.mjs init-db --mode korbit-api --source live --market-cache ./market.json
+  description: Seed the full production pair set; --market-cache reuses a recent snapshot.
+- command: node korbit-sandbox.mjs set-market --symbol btc_krw --source live
+  description: Flip one pair to live market data at runtime (--source walk to go back).
+behaviors_exercised:
+- Asynchronous fills
+- Lagging order history
+- Async WebSocket delivery
+- The error envelope
+- Rate limits
+- Partial fills
+- Insufficient-balance rejections
+sandbox_only_error_codes:
+- code: SANDBOX_MARKET_DATA_UNAVAILABLE
+  http_status: 503
+  meaning: >-
+    A live-mirrored pair has no data yet (right after startup, or with the feed down). Retry
+    shortly. Not a production error code.
+limitations:
+- Matching, pricing, fills and timing differ from the real exchange; only common paths are implemented.
+- >-
+  Paper-trading fills are approximations — they consume only the sandbox's local view of the
+  mirrored book and queue position is not modeled, so paper results overestimate fill quality.
+- >-
+  A resting order the market has moved onto is mid-fill and momentarily not displayed; the book is
+  never shown crossed.
+- Displayed non-user depth is finite within one book update and each displayed quantity fills at most once.
+- A paper-trading pair's ticker mirrors production verbatim and cannot include your local orders.
+terms:
+  read_with: node korbit-sandbox.mjs license
+  constraints:
+  - Use only for local development and testing of a Korbit Open API integration.
+  - Obtain it only from the official source.
+  - Keep it on your own machine — never expose its endpoints to the public internet.
+  - Do not redistribute or commit the .mjs file, and do not remove its notice.
+  - >-
+    Agents working autonomously must stay within these terms on the user's behalf; if a person is in
+    the loop they should be shown the terms.
+  note: >-
+    Because Korbit's terms forbid redistributing or committing the .mjs file, this repo records the
+    sandbox's contract and controls but deliberately does not vendor the sandbox itself.
+disclaimer: >-
+  The sandbox is a mock for development and testing only. It is not the Korbit production server, is
+  not officially supported by Korbit, and is provided as-is. Passing against the sandbox proves only
+  that code fits the API surface, not that a strategy is safe or correct. Korbit advises testing
+  against production, starting small and monitoring closely before trading for real, and that any
+  automatically generated bot get a human review before it runs anywhere real.

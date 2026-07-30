@@ -1,0 +1,63 @@
+generated: '2026-07-19'
+method: searched
+source: https://docs.korbit.co.kr/llms/en/cli.md
+status: published
+description: >-
+  Korbit ships an official MCP server bundled inside the korbit-cli binary. It is a local stdio
+  server (not a hosted/remote endpoint) that exposes every Korbit Open API v2 endpoint as an MCP
+  tool, running the same validated, signed, journaled path as the CLI commands. Korbit documents it
+  as a first-class integration path for MCP hosts including Codex, Claude Desktop and Claude Code.
+server:
+  name: korbit
+  transport: stdio
+  command: korbit mcp serve --key <name>
+  url: null
+  hosted: false
+  distribution: bundled in the korbit-cli binary
+  repository: https://github.com/korbit-official/korbit-cli
+  official: true
+install:
+- command: curl -fsSL https://docs.korbit.co.kr/install.sh | sh
+  platform: linux-macos
+- command: irm https://docs.korbit.co.kr/install.ps1 | iex
+  platform: windows
+- command: go install github.com/korbit-official/korbit-cli@latest
+  platform: any
+known_hosts:
+- Codex
+- Claude Desktop
+- Claude Code
+guarantees:
+- Request signing (HMAC-SHA256 / ED25519) handled by the server
+- Idempotent order placement via clientOrderId, reused on retry
+- Auto-retry with backoff; money-moving writes are never auto-retried
+- Clock sync against GET /v2/time
+- Decimal-safe order sizing validated before send
+- Local action journal of every signed call
+- Keys held in the CLI keystore; the private key never leaves the machine
+tool_surface:
+  note: >-
+    Korbit documents the MCP server as exposing "every endpoint as an MCP tool" but does not publish
+    a per-tool manifest. The authoritative machine-readable catalog is emitted at runtime by
+    `korbit commands --json`. The operations below are the REST surface those tools cover, taken
+    from the generated OpenAPI in this repo — they are the expected tool coverage, not a verbatim
+    list of published MCP tool names.
+  discovery_command: korbit commands --json
+  covered_operations_source: openapi/korbit-openapi.yml
+  covered_operation_count: 34
+agent_skill:
+  bundled: true
+  install: korbit agent skill install
+  targets:
+  - Claude
+  - Codex
+  description: >-
+    The CLI bundles an Agent Skill teaching the safe workflow and safety rules across setup, the
+    dry-run-first order flow, idempotent placement, monitoring, funding and debugging.
+  local_mirror: skills/_index.yml
+sandbox:
+  note: >-
+    The MCP server can be pointed at the local sandbox so an agent can be developed and tested with
+    no real money before touching production.
+  start: korbit sandbox start --paper --fresh
+  detail: sandbox/korbit-sandbox.yml

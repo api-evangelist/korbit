@@ -1,0 +1,115 @@
+generated: '2026-07-19'
+method: searched
+source: https://docs.korbit.co.kr/llms/en/cli.md
+name: korbit-cli
+binary: korbit
+language: go
+repository: https://github.com/korbit-official/korbit-cli
+official: true
+description: >-
+  A single static Go binary that exposes the whole Korbit Open API v2 — market data, trading,
+  balances, deposits/withdrawals and key management — as commands. Korbit documents it as the
+  recommended integration path for AI agents, because it removes the signing, idempotency and retry
+  mistakes by construction. It is equally usable by humans.
+install:
+- platform: linux-macos
+  command: curl -fsSL https://docs.korbit.co.kr/install.sh | sh
+  note: Downloads the latest release, verifies its SHA-256, and puts `korbit` on PATH.
+- platform: windows
+  command: irm https://docs.korbit.co.kr/install.ps1 | iex
+- platform: any
+  command: go install github.com/korbit-official/korbit-cli@latest
+built_in_capabilities:
+- Request signing (HMAC-SHA256 and ED25519)
+- Idempotent order placement — every order carries a clientOrderId, reused on retry so a lost
+  response can never double-place
+- Auto-retry with backoff; money-moving writes are never auto-retried
+- Signing-clock sync against GET /v2/time
+- Decimal-safe order sizing validated before anything is sent
+- Local action journal of every signed call, replayable
+- Keystore — the private key never leaves the machine and is never printed
+command_groups:
+- name: mcp
+  commands:
+  - command: korbit mcp serve --key <name>
+    description: >-
+      Run the bundled MCP server, exposing every Korbit endpoint as an MCP tool to hosts such as
+      Codex, Claude Desktop and Claude Code — with the same validation, signing and retries as the
+      commands.
+- name: agent
+  commands:
+  - command: korbit agent skill install
+    description: >-
+      Install the bundled Agent Skill (for Claude, Codex, or both), which teaches the safe workflow
+      and safety rules across setup, the dry-run-first order flow, idempotent placement, monitoring,
+      funding and debugging.
+- name: sandbox
+  commands:
+  - command: korbit sandbox start
+    description: Start the local sandbox (the same mock served at docs.korbit.co.kr/korbit-sandbox.mjs).
+  - command: korbit sandbox start --paper --fresh
+    description: >-
+      Paper trading against live production market data, wiping the database each start. Omit
+      --fresh to keep balances and orders. Add --all-pairs to seed every launched production pair.
+- name: discovery
+  commands:
+  - command: korbit commands --json
+    description: >-
+      Emit the full machine-readable catalog of every command, flag, enum and exit code. Korbit
+      documents this as the way agents should discover the surface rather than guessing it.
+  - command: <any command> --json
+    description: Emit one machine-readable JSON document per command.
+- name: self
+  commands:
+  - command: korbit self update
+    description: Update the installed binary in place.
+  - command: korbit self doctor
+    description: Health-check the installation.
+agent_guidance:
+  recommended_for_agents: true
+  rationale: >-
+    Korbit's own documentation tells agents to prefer the CLI over hand-rolling a client, because it
+    already implements the request signing, idempotent placement, retry and clock-sync patterns the
+    rest of the guide warns them to get right.
+  drive_by:
+  - Shelling out to commands with --json
+  - Running the bundled MCP server
+reference_implementation:
+  note: >-
+    The CLI source is documented as a working reference for developers building their own client.
+    Korbit maps each concern to the file that implements it.
+  map:
+  - concern: Request signing (HMAC-SHA256 / ED25519)
+    source: internal/korbit/client.go
+  - concern: clientOrderId minting (UUIDv7, charset)
+    source: internal/ids/ids.go
+  - concern: Order placement + lost-response reconcile
+    source: internal/ops/op_place.go
+  - concern: Retry / backoff, HTTP 429
+    source: internal/korbit/retry.go
+  - concern: Tick-size snapping, decimal math
+    source: internal/ops/tick.go
+  - concern: Fee headroom, minimum-notional checks
+    source: internal/ops/account_ops.go, internal/ops/preplace.go
+  - concern: Real-time account state via WebSocket
+    source: internal/stream/state/state.go
+  - concern: Local in-flight balance holds
+    source: internal/stream/state/localhold.go
+  - concern: Signing-clock sync
+    source: internal/clock/syncer.go
+  - concern: Sub-account (accountSeq) scoping
+    source: internal/accountseq/accountseq.go
+  - concern: WebSocket stream, reconnect, backfill
+    source: internal/stream/session.go
+caveats:
+- >-
+  Rate limiting is reactive only: on HTTP 429 the CLI honors Retry-After (else backs off) within a
+  per-call budget, then surfaces the error. It does not track request rate to stay under the limit
+  in advance — proactive per-bucket budgeting must be built in your own client.
+- >-
+  The scripting hooks for building a streaming bot are documented as experimental and may change;
+  Korbit advises against building long-lived bots on them yet.
+related:
+  packages: packages/korbit-packages.yml
+  mcp: mcp/korbit-mcp.yml
+  sandbox: sandbox/korbit-sandbox.yml

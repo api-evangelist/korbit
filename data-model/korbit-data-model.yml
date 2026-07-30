@@ -1,0 +1,352 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/korbit-openapi.yml
+description: 'Entity-relationship graph for the Korbit Open API v2, derived from the response schemas
+  and id-reference fields of the generated OpenAPI. Korbit''s API is resource-shallow and identifier-linked
+  rather than $ref-linked: there are no reusable components.schemas, so entities are inferred from each
+  endpoint group''s response object and joined on the identifier fields they share (symbol, currency,
+  orderId, address, accountSeq).'
+identifiers:
+- field: symbol
+  shape: <base>_<quote>, lowercase
+  example: btc_krw
+  joins: every market-scoped entity
+- field: currency
+  shape: lowercase ticker
+  example: btc
+  joins: Balance, DepositAddress, CoinDeposit, CoinWithdrawal, Currency
+- field: orderId
+  shape: integer, server-assigned
+  example: 1234
+  joins: Order, MyTrade
+- field: clientOrderId
+  shape: '[0-9a-zA-Z.:_-]{1,36}, client-supplied'
+  example: 20141231-155959-abcdef
+  joins: Order — the idempotency key; see conventions/korbit-conventions.yml
+- field: accountSeq
+  shape: integer, defaults to 1 (main account)
+  example: 1
+  joins: scopes every private entity to a sub-account
+entities:
+- name: Ticker
+  description: Latest price and 24H volume for a trading pair.
+  source_operation: getTickers
+  fields:
+  - symbol
+  - open
+  - high
+  - low
+  - close
+  - prevClose
+  - priceChange
+  - priceChangePercent
+  - volume
+  - quoteVolume
+  - bestBidPrice
+  - bestAskPrice
+  - lastTradedAt
+- name: OrderbookLevel
+  description: Aggregated bid/ask depth for a trading pair.
+  source_operation: getOrderbook
+  fields:
+  - timestamp
+  - bids
+  - asks
+- name: Trade
+  description: A public market trade.
+  source_operation: getTrades
+  fields:
+  - timestamp
+  - price
+  - qty
+  - isBuyerTaker
+  - tradeId
+- name: Candle
+  description: OHLCV candlestick for a trading pair and interval.
+  source_operation: getCandles
+  fields:
+  - timestamp
+  - open
+  - high
+  - low
+  - close
+  - volume
+- name: CurrencyPair
+  description: A tradable market (symbol) and its order constraints.
+  source_operation: getCurrencyPairs
+  fields:
+  - symbol
+  - status
+- name: TickSizePolicy
+  description: Tick size and orderbook grouping levels for a pair.
+  source_operation: getTickSizePolicy
+  fields: []
+- name: Order
+  description: An order placed by the authenticated account.
+  source_operation: getOrders
+  fields:
+  - orderId
+  - clientOrderId
+  - symbol
+  - orderType
+  - side
+  - timeInForce
+  - price
+  - qty
+  - amt
+  - filledQty
+  - filledAmt
+  - avgPrice
+  - createdAt
+  - lastFilledAt
+  - triggeredAt
+  - status
+- name: MyTrade
+  description: A fill against the authenticated account's order.
+  source_operation: getMyTrades
+  fields:
+  - symbol
+  - tradeId
+  - orderId
+  - side
+  - price
+  - qty
+  - amt
+  - tradedAt
+  - isTaker
+  - feeCurrency
+  - feeQty
+- name: Balance
+  description: Per-currency balance for the authenticated account.
+  source_operation: getBalance
+  fields:
+  - currency
+  - balance
+  - available
+  - tradeInUse
+  - withdrawalInUse
+  - avgPrice
+- name: DepositAddress
+  description: A cryptocurrency deposit address.
+  source_operation: getCoinDepositAddress
+  fields:
+  - currency
+  - network
+  - address
+  - secondaryAddress
+- name: CoinDeposit
+  description: A cryptocurrency deposit transaction.
+  source_operation: getCoinDeposit
+  fields:
+  - id
+  - network
+  - address
+  - secondaryAddress
+  - status
+  - transactionHash
+  - currency
+  - quantity
+  - createdAt
+- name: WithdrawableAddress
+  description: A registered withdrawal address.
+  source_operation: getCoinWithdrawableAddresses
+  fields:
+  - network
+  - currency
+  - address
+  - secondaryAddress
+- name: CoinWithdrawal
+  description: A cryptocurrency withdrawal request.
+  source_operation: getCoinWithdrawal
+  fields:
+  - id
+  - quantity
+  - fee
+  - currency
+  - status
+  - network
+  - address
+  - secondaryAddress
+  - transactionHash
+  - createdAt
+- name: KrwDeposit
+  description: A KRW deposit record.
+  source_operation: getKrwRecentDeposits
+  fields:
+  - id
+  - type
+  - status
+  - quantity
+  - createdAt
+- name: KrwWithdrawal
+  description: A KRW withdrawal record.
+  source_operation: getKrwRecentWithdrawals
+  fields:
+  - id
+  - quantity
+  - fee
+  - status
+  - createdAt
+- name: Currency
+  description: A supported cryptocurrency and its network/withdrawal metadata.
+  source_operation: getCurrencies
+  fields:
+  - name
+  - fullName
+  - withdrawalStatus
+  - depositStatus
+  - confirmationCount
+  - withdrawalTxFee
+  - withdrawalMinAmount
+  - withdrawalMaxAmountPerRequest
+  - defaultNetwork
+  - networkList
+- name: TradingFeePolicy
+  description: Trading fee rates applied to the account.
+  source_operation: getTradingFeePolicy
+  fields:
+  - symbol
+  - buyFeeCurrency
+  - sellFeeCurrency
+  - maxFeeRate
+  - takerFeeRate
+  - makerFeeRate
+- name: ApiKeyInfo
+  description: The calling API key's permissions and metadata.
+  source_operation: getCurrentKeyInfo
+  fields:
+  - apiKey
+  - userUuid
+  - type
+  - publicKey
+  - permissions
+  - whitelist
+  - expiration
+  - status
+  - label
+  - allowedAccountSeqs
+  - createdAt
+- name: Notice
+  description: A Korbit announcement.
+  source_operation: getNotices
+  fields:
+  - title
+  - createdAt
+  - updatedAt
+  - url
+- name: MarketAlert
+  description: Market Warning System status for a trading pair.
+  source_operation: getMarketAlerts
+  fields:
+  - symbol
+  - alerts
+relationships:
+- from: Order
+  to: CurrencyPair
+  type: belongs_to
+  via: symbol
+  note: Every order names the market it trades on.
+- from: Order
+  to: MyTrade
+  type: has_many
+  via: orderId
+  note: An order accrues one or more fills; myTrades rows carry the parent orderId.
+- from: MyTrade
+  to: Order
+  type: belongs_to
+  via: orderId
+  note: A fill belongs to exactly one order.
+- from: MyTrade
+  to: CurrencyPair
+  type: belongs_to
+  via: symbol
+  note: A fill is scoped to one market.
+- from: Ticker
+  to: CurrencyPair
+  type: belongs_to
+  via: symbol
+  note: One ticker per market.
+- from: Trade
+  to: CurrencyPair
+  type: belongs_to
+  via: symbol
+  note: Public trades are per market.
+- from: Candle
+  to: CurrencyPair
+  type: belongs_to
+  via: symbol
+  note: Candles are per market and interval.
+- from: OrderbookLevel
+  to: CurrencyPair
+  type: belongs_to
+  via: symbol
+  note: Depth is per market.
+- from: TickSizePolicy
+  to: CurrencyPair
+  type: belongs_to
+  via: symbol
+  note: Tick size and grouping levels are defined per market.
+- from: MarketAlert
+  to: CurrencyPair
+  type: belongs_to
+  via: symbol
+  note: Alerts are raised per market.
+- from: CurrencyPair
+  to: Currency
+  type: belongs_to
+  via: base/quote currency
+  note: A market pairs a base currency with a quote currency (KRW for all listed pairs).
+- from: Balance
+  to: Currency
+  type: belongs_to
+  via: currency
+  note: One balance row per currency held.
+- from: DepositAddress
+  to: Currency
+  type: belongs_to
+  via: currency
+  note: A deposit address is issued per cryptocurrency.
+- from: CoinDeposit
+  to: Currency
+  type: belongs_to
+  via: currency
+  note: A deposit moves one cryptocurrency.
+- from: CoinDeposit
+  to: DepositAddress
+  type: belongs_to
+  via: address
+  note: A deposit credits a previously issued deposit address.
+- from: CoinWithdrawal
+  to: Currency
+  type: belongs_to
+  via: currency
+  note: A withdrawal moves one cryptocurrency.
+- from: CoinWithdrawal
+  to: WithdrawableAddress
+  type: belongs_to
+  via: address
+  note: A withdrawal must target an address pre-registered for API withdrawals.
+- from: WithdrawableAddress
+  to: Currency
+  type: belongs_to
+  via: currency
+  note: Registered withdrawal addresses are per cryptocurrency.
+- from: Balance
+  to: Order
+  type: has_many
+  via: accountSeq
+  note: Open orders hold balance against the account they were placed on.
+- from: ApiKeyInfo
+  to: Order
+  type: has_many
+  via: permission
+  note: A key's writeOrders/readOrders permissions gate the order surface it can reach.
+notes:
+- No components.schemas exist in the source documentation, so no $ref graph could be walked; relationships
+  are derived from shared identifier fields.
+- Monetary and quantity fields are transported as strings throughout.
+- There is no customer/user entity in the API surface — every private call is implicitly scoped to the
+  API key's account and optionally a sub-account via accountSeq.
+related:
+  openapi: openapi/korbit-openapi.yml
+  conventions: conventions/korbit-conventions.yml

@@ -1,0 +1,86 @@
+generated: '2026-07-19'
+method: generated
+source: >-
+  Grounded in openapi/korbit-openapi.yml and asyncapi/korbit-websocket-asyncapi.yml, with the
+  operating rules taken from Korbit's published agent documentation
+  (https://docs.korbit.co.kr/llms-full.txt).
+description: >-
+  Packaged Agent Skills for the Korbit Open API v2 — one per marquee flow. Every operationId
+  referenced was verified against the generated OpenAPI in this repo; none are invented.
+provider_published_skill:
+  exists: true
+  official: true
+  name: korbit
+  install: korbit agent skill install
+  targets:
+  - Claude
+  - Codex
+  distribution: bundled inside the korbit-cli binary
+  source: https://github.com/korbit-official/korbit-cli
+  docs: https://docs.korbit.co.kr/llms/en/cli.md
+  description: >-
+    Korbit ships its own first-party Agent Skill teaching the safe workflow and safety rules across
+    setup, the dry-run-first order flow, idempotent placement, monitoring, funding and debugging. It
+    is installed by the CLI rather than published as a standalone downloadable file, so it could not
+    be saved verbatim here. Where an environment can run the binary, prefer the official skill and
+    the official MCP server over the generated skills below.
+skills:
+- file: korbit-market-data.md
+  name: Read Korbit market data
+  api: openapi/korbit-openapi.yml
+  risk: read-only
+  auth_required: false
+  operations: [getTickers, getOrderbook, getTrades, getCandles, getCurrencyPairs, getTickSizePolicy,
+    getCurrencies, getMarketAlerts, getTime]
+- file: korbit-place-order-safely.md
+  name: Place a Korbit order safely
+  api: openapi/korbit-openapi.yml
+  risk: money-moving
+  auth_required: true
+  permissions: [writeOrders, readOrders, readBalances]
+  operations: [getTime, getCurrencyPairs, getTickSizePolicy, getBalance, getTradingFeePolicy,
+    createOrders, getOrders, deleteOrders]
+- file: korbit-monitor-orders-and-fills.md
+  name: Monitor Korbit orders, fills and balances
+  api: openapi/korbit-openapi.yml
+  risk: read-only
+  auth_required: true
+  permissions: [readOrders, readBalances]
+  operations: [getOrders, getOpenOrders, getAllOrders, getMyTrades, getBalance, getTradingFeePolicy,
+    getCurrentKeyInfo]
+- file: korbit-stream-account-state.md
+  name: Stream Korbit market and account state over WebSocket
+  api: asyncapi/korbit-websocket-asyncapi.yml
+  risk: read-only
+  auth_required: partial
+  permissions: [readOrders, readBalances]
+  operations: [receiveTicker, receiveOrderbook, receiveTrade, receiveMyOrder, receiveMyTrade,
+    receiveMyAsset]
+- file: korbit-fund-and-withdraw.md
+  name: Fund a Korbit account and withdraw
+  api: openapi/korbit-openapi.yml
+  risk: irreversible-value-transfer
+  auth_required: true
+  human_in_the_loop: required
+  permissions: [readDeposits, writeDeposits, readWithdrawals, writeWithdrawals]
+  operations: [getCoinDepositAddresses, getCoinDepositAddress, createCoinDepositAddress,
+    getCoinRecentDeposits, getCoinDeposit, getCoinWithdrawableAddresses, getCoinWithdrawableAmount,
+    createCoinWithdrawal, deleteCoinWithdrawal, getCoinRecentWithdrawals, getCoinWithdrawal,
+    createKrwSendKrwDepositPush, createKrwSendKrwWithdrawalPush, getKrwRecentDeposits,
+    getKrwRecentWithdrawals, getCurrencies]
+cross_cutting_rules:
+- Sign against Korbit's server clock (getTime), never the host clock — the accepted window is
+  asymmetric and a fast clock fails every signed request.
+- Order placement is idempotent only via a persisted clientOrderId; withdrawals have no idempotency
+  key and must never be auto-retried.
+- Never infer execution from order status — read filledQty/filledAmt.
+- Order and trade history is capped at 36 hours; keep your own durable record.
+- Develop against the local sandbox before touching production.
+- Never log the API secret, private key or request signature.
+related:
+  conventions: conventions/korbit-conventions.yml
+  errors: errors/korbit-error-codes.yml
+  rate_limits: rate-limits/korbit-rate-limits.yml
+  mcp: mcp/korbit-mcp.yml
+  cli: cli/korbit-cli.yml
+  sandbox: sandbox/korbit-sandbox.yml

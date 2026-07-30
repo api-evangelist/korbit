@@ -1,0 +1,161 @@
+generated: '2026-07-19'
+method: searched
+source: https://docs.korbit.co.kr/llms-full.txt
+docs: https://docs.korbit.co.kr/llms/en/rest_api.md
+description: >-
+  Cross-cutting request/response semantics for the Korbit Open API v2, captured from Korbit's own
+  published agent documentation and cross-checked against the OpenAPI generated in this repo.
+authentication:
+  style: api-key-plus-request-signature
+  header: X-KAPI-KEY
+  signature_algorithms:
+  - HMAC-SHA256 (signature is hex; Korbit provides the secret key)
+  - ED25519 (signature is Base64 and must be URL-encoded when sent in query/body; the user generates
+    the key pair and registers only the public key)
+  signed_parameters:
+  - timestamp
+  - signature
+  signing_rule: >-
+    The signature is computed over the exact encoded string that will be sent, excluding `signature`
+    itself, which is then appended. Parameter order does not matter, but if a request carries both
+    query string and body parameters, sign queryString + bodyString with no extra `&` between them.
+    Korbit advises keeping all signed parameters in one place.
+  key_permissions:
+  - readOrders
+  - writeOrders
+  - readBalances
+  - readDeposits
+  - writeDeposits
+  - readWithdrawals
+  - writeWithdrawals
+  ip_allowlist: supported
+  key_validity: one year from creation
+  propagation: Permission and IP changes can take up to about one minute to apply.
+  detail: authentication/korbit-authentication.yml
+idempotency:
+  supported: true
+  mechanism: client-supplied-identifier
+  parameter: clientOrderId
+  location: request body (POST /v2/orders)
+  scope: order placement
+  header: null
+  note: >-
+    Korbit does not use an Idempotency-Key header. Idempotency is expressed through the
+    `clientOrderId` request parameter on order placement, which Korbit processes exactly once: a
+    retried request that actually reached the server is collapsed server-side.
+  charset: '[0-9a-zA-Z.:_-]{1,36}'
+  retention: >-
+    A clientOrderId effectively never frees up. Orders with status `expired` or `canceled` cannot be
+    searched by clientOrderId, and the same clientOrderId can be reused approximately three days
+    after they have been closed.
+  duplicate_behavior:
+    error_code: DUPLICATE_CLIENT_ORDER_ID
+    guidance: >-
+      Treat DUPLICATE_CLIENT_ORDER_ID as success — it means a prior attempt already registered this
+      order. Look it up with GET /v2/orders using the clientOrderId instead of resending.
+  provider_guidance:
+  - >-
+    Mint a collision-resistant id once per placement decision and persist it before sending the
+    request, keyed by your internal placement id; reload and reuse it on any retry or restart.
+  - >-
+    UUIDv7 is the recommended default — time-ordered, globally unique, and exactly 36 chars, fitting
+    the charset without truncation.
+  - >-
+    Never derive the id from the order's business identity (a hash of symbol/side/price/qty). Because
+    the id never frees up, a genuinely-distinct later order repeating those fields would collide and
+    be rejected.
+  - Never .slice() an id to fit — truncation can collapse two distinct placements onto one value.
+  - >-
+    A network timeout does not tell you whether the order was placed; never blindly resend a
+    placement.
+  lookup_operation: getOrders
+  place_operation: createOrders
+pagination:
+  style: none
+  note: >-
+    The Korbit Open API v2 does not expose cursor or offset pagination. History endpoints are bounded
+    by a server-side time window instead: GET /v2/allOrders and GET /v2/myTrades return only records
+    created within the last 36 hours, and GET /v2/notices returns the 20 most recent notices.
+  windows:
+  - operation: getAllOrders
+    limit: orders created within 36 hours
+  - operation: getMyTrades
+    limit: trade history from the past 36 hours
+  - operation: getNotices
+    limit: 20 most recent notices
+field_expansion:
+  supported: false
+sparse_fieldsets:
+  supported: false
+metadata:
+  supported: false
+  note: >-
+    There is no free-form metadata field. `clientOrderId` is the only user-supplied identifier that
+    round-trips on an order.
+request_tracing:
+  request_id_header: null
+  note: >-
+    Korbit does not document a request-id response header. Its guidance is to log request ids,
+    clientOrderId, orderId, status transitions and API error codes on the client side, while
+    redacting credentials and signatures.
+versioning:
+  scheme: uri-path
+  current: v2
+  example: https://api.korbit.co.kr/v2/tickers
+  detail: lifecycle/korbit-lifecycle.yml
+response_envelope:
+  success:
+    shape: '{"success": true, "data": ...}'
+    note: >-
+      For list endpoints `data` is an array. For action endpoints (e.g. cancel) a successful response
+      may be `{"success": true}` with no `data`.
+  error:
+    shape: '{"success": false, "error": {"message": "<CODE>"}}'
+    code_field: error.message
+    format: symbolic-string-codes
+    rfc9457: false
+    detail: errors/korbit-error-codes.yml
+timestamps:
+  format: unix-milliseconds
+  note: All REST timestamps are Unix timestamps in milliseconds.
+timestamp_window:
+  parameter: recvWindow
+  default_ms: 5000
+  max_ms: 60000
+  acceptance_rule: 'serverTime - timestamp <= recvWindow AND timestamp < serverTime + 1000'
+  error_code: EXCEED_TIME_WINDOW
+  asymmetry_warning: >-
+    The window is asymmetric — recvWindow widens only the past side, while the future bound is a
+    fixed +1000 ms. A clock even slightly ahead of the server fails every signed request and raising
+    recvWindow cannot help. Sign against Korbit's server clock from GET /v2/time, not the raw host
+    clock.
+  server_time_operation: getTime
+content_types:
+  get_delete: Input values are sent as query string parameters.
+  post: >-
+    Input values are sent in the body as application/x-www-form-urlencoded, with an explicit
+    Content-Type: application/x-www-form-urlencoded header.
+  responses: application/json
+numeric_handling:
+  monetary_fields: string
+  note: >-
+    Prices, quantities and amounts are transported as strings. Korbit publishes a decimal-safe order
+    math recipe and a tick-size policy endpoint (GET /v2/tickSizePolicy) for snapping prices.
+sub_accounts:
+  parameter: accountSeq
+  default: 1 (main account)
+  note: Private calls should be scoped to the right sub-account.
+rate_limit_signaling:
+  headers:
+  - 'Ratelimit: limit=50, remaining=48, reset=1'
+  - 'Ratelimit-Policy: 50;w=1'
+  - Retry-After
+  http_status: 429
+  guidance: On HTTP 429, pause until Retry-After or the Ratelimit reset window before retrying.
+  detail: rate-limits/korbit-rate-limits.yml
+related:
+  errors: errors/korbit-error-codes.yml
+  lifecycle: lifecycle/korbit-lifecycle.yml
+  authentication: authentication/korbit-authentication.yml
+  rate_limits: rate-limits/korbit-rate-limits.yml
+  sandbox: sandbox/korbit-sandbox.yml

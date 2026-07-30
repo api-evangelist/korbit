@@ -1,0 +1,59 @@
+generated: '2026-07-19'
+method: searched
+source: https://docs.korbit.co.kr/llms/en/rest_api.md
+docs: https://docs.korbit.co.kr/
+description: >-
+  Published rate limits for the Korbit Open API v2, with the response headers a client uses to track
+  remaining quota.
+signaling:
+  headers:
+  - name: Ratelimit
+    example: 'Ratelimit: limit=50, remaining=48, reset=1'
+    fields: [limit, remaining, reset]
+  - name: Ratelimit-Policy
+    example: 'Ratelimit-Policy: 50;w=1'
+  - name: Retry-After
+    note: Accompanies HTTP 429.
+  http_status: 429
+  guidance: On HTTP 429, pause until Retry-After or the Ratelimit reset window before retrying.
+rate_limits:
+- name: Public REST
+  limit_count: 50
+  interval: second
+  unit: requests
+  scope: ip
+  applies_to: Public endpoints (market data)
+- name: Order placement
+  limit_count: 30
+  interval: second
+  unit: requests
+  scope: account
+  applies_to: 'POST /v2/orders'
+- name: Order cancellation
+  limit_count: 30
+  interval: second
+  unit: requests
+  scope: account
+  applies_to: 'DELETE /v2/orders'
+- name: Deposit / withdrawal
+  limit_count: 5
+  interval: second
+  unit: requests
+  scope: account
+  applies_to: Cryptocurrency and KRW deposit/withdrawal endpoints
+- name: Other private REST
+  limit_count: 50
+  interval: second
+  unit: requests
+  scope: account
+  applies_to: All other authenticated endpoints
+notes:
+- Private limits are measured per account, not per API key.
+- Public limits are measured per IP address.
+- >-
+  korbit-cli handles rate limits reactively only — it honors Retry-After on 429 within a per-call
+  budget but does not track request rate to stay under the limit in advance. Proactive per-bucket
+  budgeting across the public, order and cancel buckets must be implemented in your own client.
+related:
+  conventions: conventions/korbit-conventions.yml
+  errors: errors/korbit-error-codes.yml

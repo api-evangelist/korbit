@@ -1,0 +1,108 @@
+generated: '2026-07-19'
+method: searched
+description: >-
+  Probe of the /.well-known/ discovery surface across every Korbit host in this repo. No well-known
+  document is published. Both www.korbit.co.kr and docs.korbit.co.kr are single-page applications
+  that serve their HTML shell with HTTP 200 for any unmatched path, so a bare status code is not
+  evidence of a document — every probe below was content-verified and every one returned the site's
+  HTML shell (Content-Type: text/html), not the expected text or JSON. api.korbit.co.kr returns 503
+  for browser-style requests at the document root. Recorded as an honest negative.
+probe_method: >-
+  HTTP GET per path, recording status plus Content-Type and a body sample; a document counts as
+  published only when the content type and payload match the expected format.
+spa_catch_all: true
+hosts:
+- host: https://www.korbit.co.kr
+  spa_catch_all: true
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    published: false
+    content_type: text/html
+    note: SPA HTML shell, not RFC 9116 text.
+  - path: /.well-known/openid-configuration
+    status: 403
+    published: false
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    published: false
+    content_type: text/html
+    note: SPA HTML shell.
+  - path: /.well-known/api-catalog
+    status: 200
+    published: false
+    content_type: text/html
+    note: SPA HTML shell.
+  - path: /.well-known/ai-plugin.json
+    status: 200
+    published: false
+    content_type: text/html
+    note: SPA HTML shell.
+- host: https://docs.korbit.co.kr
+  spa_catch_all: true
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    published: false
+    content_type: text/html
+    note: SPA HTML shell, not RFC 9116 text.
+  - path: /.well-known/openid-configuration
+    status: 200
+    published: false
+    content_type: text/html
+    note: SPA HTML shell.
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    published: false
+    content_type: text/html
+    note: SPA HTML shell.
+  - path: /.well-known/api-catalog
+    status: 200
+    published: false
+    content_type: text/html
+    note: SPA HTML shell.
+  - path: /.well-known/ai-plugin.json
+    status: 200
+    published: false
+    content_type: text/html
+    note: SPA HTML shell.
+- host: https://api.korbit.co.kr
+  documents:
+  - path: /.well-known/security.txt
+    status: 503
+    published: false
+  - path: /.well-known/openid-configuration
+    status: 503
+    published: false
+  - path: /.well-known/oauth-authorization-server
+    status: 503
+    published: false
+  - path: /.well-known/api-catalog
+    status: 503
+    published: false
+  - path: /.well-known/ai-plugin.json
+    status: 503
+    published: false
+security_txt:
+  published: false
+agent_discovery:
+  note: >-
+    Korbit does not use /.well-known/ for agent discovery, but it does publish a real llms.txt at the
+    docs host — content-verified as text/plain markdown, saved verbatim in this repo.
+  llms_txt:
+    url: https://docs.korbit.co.kr/llms.txt
+    status: 200
+    published: true
+    file: ../llms/korbit-llms.txt
+  llms_full:
+    url: https://docs.korbit.co.kr/llms-full.txt
+    status: 200
+    published: true
+    note: >-
+      Not committed — *-llms-full.txt is gitignored per the enrichment pipeline contract. It is the
+      source for the generated OpenAPI, AsyncAPI and the searched artifacts in this repo.
+  robots_txt:
+    url: https://docs.korbit.co.kr/robots.txt
+    status: 200
+    published: true
+    content: 'User-agent: * / Allow: /'

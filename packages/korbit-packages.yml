@@ -1,0 +1,73 @@
+generated: '2026-07-19'
+method: searched
+source: https://docs.korbit.co.kr/llms/en/cli.md
+notes: >-
+  Korbit ships exactly one first-party client library: the official korbit-cli Go module, which
+  doubles as the CLI binary and the MCP server. It is the only package in the korbit-official GitHub
+  organization. Registry sweeps of npm, PyPI, Maven Central, NuGet, RubyGems, Packagist and
+  crates.io surfaced only community-maintained wrappers (npm `korbit`, `korbit-sdk`, `korbit-node`,
+  `korbitapi`; PyPI `korbit` by Sumin Byeon) — none are first-party, so none are marked official.
+  Korbit's own guidance is to drive the official CLI (or its MCP server) rather than a language SDK,
+  and to use the published signing helpers when building a client directly.
+packages:
+- language: go
+  registry: go-modules
+  name: github.com/korbit-official/korbit-cli
+  url: https://github.com/korbit-official/korbit-cli
+  install: go install github.com/korbit-official/korbit-cli@latest
+  versions:
+  - v1.0.0
+  official: true
+  kind: cli
+  description: >-
+    Official Korbit CLI — a single static Go binary exposing the whole Korbit Open API v2 as
+    commands, with request signing (HMAC-SHA256 / ED25519), idempotent order placement, retry with
+    backoff, clock sync, decimal-safe sizing, a local action journal, an embedded MCP server
+    (`korbit mcp serve`) and a bundled Agent Skill.
+  proxy_verified: https://proxy.golang.org/github.com/korbit-official/korbit-cli/@v/list
+install_methods:
+- kind: install-script
+  platform: linux-macos
+  command: curl -fsSL https://docs.korbit.co.kr/install.sh | sh
+  description: Downloads the latest release, verifies its SHA-256 checksum, and puts `korbit` on PATH.
+- kind: install-script
+  platform: windows
+  command: irm https://docs.korbit.co.kr/install.ps1 | iex
+- kind: go-install
+  platform: any
+  command: go install github.com/korbit-official/korbit-cli@latest
+  note: Produces a `korbit-cli` binary; rename to `korbit` to match the documented examples.
+- kind: self-update
+  command: korbit self update
+  note: An installed binary updates itself in place; `korbit self doctor` checks its own health.
+community_packages:
+- language: javascript
+  registry: npm
+  name: korbit
+  url: https://www.npmjs.com/package/korbit
+  official: false
+- language: javascript
+  registry: npm
+  name: korbit-sdk
+  url: https://www.npmjs.com/package/korbit-sdk
+  official: false
+- language: javascript
+  registry: npm
+  name: korbit-node
+  url: https://www.npmjs.com/package/korbit-node
+  official: false
+- language: python
+  registry: pypi
+  name: korbit
+  url: https://pypi.org/project/korbit/
+  official: false
+  author: Sumin Byeon
+registries_checked:
+- npm
+- pypi
+- maven-central
+- nuget
+- pkg.go.dev
+- rubygems
+- packagist
+- crates.io

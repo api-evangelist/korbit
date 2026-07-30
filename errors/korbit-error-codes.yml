@@ -1,0 +1,216 @@
+generated: '2026-07-19'
+method: searched
+source: https://docs.korbit.co.kr/llms/en/rest_api.md
+docs: https://docs.korbit.co.kr/
+format: symbolic-string-codes
+rfc9457: false
+description: >-
+  Korbit does not use RFC 9457 problem+json. Errors are returned in the standard response envelope
+  with a symbolic string code carried on `error.message`. This catalog is the full published error
+  reference, cross-checked against the per-operation error lists in the generated OpenAPI.
+envelope:
+  shape: '{"success": false, "error": {"message": "<CODE>"}}'
+  code_field: error.message
+  content_type: application/json
+transient_codes:
+  description: >-
+    Codes and conditions Korbit documents as safe to retry with backoff. Everything else should be
+    treated as terminal for that request.
+  codes:
+  - TRY_AGAIN
+  http_conditions:
+  - No HTTP status (network failure)
+  - 429
+  - 5xx
+  caution: >-
+    A network timeout on order placement does not tell you whether the order was placed. Never
+    blindly resend a placement — reconcile via clientOrderId first. See
+    conventions/korbit-conventions.yml.
+errors:
+- code: BAD_REQUEST
+  message: Bad request.
+  operations: [createOrders]
+  paths: ['POST /v2/orders']
+  area: trading
+- code: CANNOT_CANCEL_WITHDRAWAL
+  message: The withdrawal cannot be canceled (likely because it's being processed).
+  operations: [deleteCoinWithdrawal]
+  paths: ['DELETE /v2/coin/withdrawal']
+  area: withdrawal
+- code: DAILY_LIMIT_EXCEEDED
+  message: You have exceeded the daily withdrawal limit.
+  operations: [createCoinWithdrawal]
+  paths: ['POST /v2/coin/withdrawal']
+  area: withdrawal
+- code: DUPLICATE_CLIENT_ORDER_ID
+  message: Request rejected due to duplicate clientOrderId.
+  operations: [createOrders]
+  paths: ['POST /v2/orders']
+  area: trading
+  remediation: >-
+    Treat as success — a prior attempt already registered this order. Look it up with GET /v2/orders
+    by clientOrderId instead of resending.
+- code: EXCEED_TIME_WINDOW
+  message: The request timestamp fell outside the accepted signing window.
+  operations: []
+  paths: [any signed request]
+  area: authentication
+  remediation: >-
+    Sign against Korbit's server clock from GET /v2/time. The window is asymmetric — raising
+    recvWindow cannot help a clock that is ahead of the server.
+- code: FORBIDDEN_WITHDRAWAL_ADDRESS
+  message: Withdrawals to the address is forbidden due to policy.
+  operations: [createCoinWithdrawal]
+  paths: ['POST /v2/coin/withdrawal']
+  area: withdrawal
+- code: INVALID_CURRENCY
+  message: Invalid currency.
+  operations: [createCoinWithdrawal]
+  paths: ['POST /v2/coin/withdrawal']
+  area: withdrawal
+- code: INVALID_CURRENCY_PAIR
+  message: Invalid symbol.
+  operations: [createOrders]
+  paths: ['POST /v2/orders']
+  area: trading
+- code: INVALID_USER_STATUS
+  message: Trading has been temporarily restricted according to Korbit's policy.
+  operations: [createCoinWithdrawal, createOrders]
+  paths: ['POST /v2/coin/withdrawal', 'POST /v2/orders']
+  area: account
+- code: NOT_FOUND
+  message: The withdrawal cannot be found.
+  operations: [deleteCoinWithdrawal]
+  paths: ['DELETE /v2/coin/withdrawal']
+  area: withdrawal
+- code: NO_BALANCE
+  message: Insufficient balance.
+  operations: [createCoinWithdrawal, createOrders]
+  paths: ['POST /v2/coin/withdrawal', 'POST /v2/orders']
+  area: account
+- code: ONLY_SELL_LIMIT_ORDERS_ALLOWED
+  message: Only limit sell orders are allowed during the initial listing period.
+  operations: [createOrders]
+  paths: ['POST /v2/orders']
+  area: trading
+- code: ORDER_ALREADY_CANCELED
+  message: Already canceled order.
+  operations: [deleteOrders]
+  paths: ['DELETE /v2/orders']
+  area: trading
+- code: ORDER_ALREADY_EXPIRED
+  message: Already expired order.
+  operations: [deleteOrders]
+  paths: ['DELETE /v2/orders']
+  area: trading
+- code: ORDER_ALREADY_FILLED
+  message: Already filled order.
+  operations: [deleteOrders]
+  paths: ['DELETE /v2/orders']
+  area: trading
+- code: ORDER_NOT_FOUND
+  message: Not found order.
+  operations: [deleteOrders]
+  paths: ['DELETE /v2/orders']
+  area: trading
+- code: ORDER_VALUE_TOO_LARGE
+  message: >-
+    Order exceeds the maximum amount. Please adjust the qty * price to be 1 billion KRW or less.
+  operations: [createOrders]
+  paths: ['POST /v2/orders']
+  area: trading
+- code: ORDER_VALUE_TOO_SMALL
+  message: >-
+    Order does not meet the minimum amount. Please adjust the qty * price to be at least 5,000 KRW.
+  operations: [createOrders]
+  paths: ['POST /v2/orders']
+  area: trading
+- code: PRICE_OVER_UPPER_BOUND
+  message: Above the upper price limit during the initial listing period.
+  operations: [createOrders]
+  paths: ['POST /v2/orders']
+  area: trading
+- code: PRICE_TICK_SIZE_INVALID
+  message: Invalid tick size.
+  operations: [createOrders]
+  paths: ['POST /v2/orders']
+  area: trading
+  remediation: Snap the price using GET /v2/tickSizePolicy (operation getTickSizePolicy).
+- code: PRICE_UNDER_LOWER_BOUND
+  message: Below the lower price limit during the initial listing period.
+  operations: [createOrders]
+  paths: ['POST /v2/orders']
+  area: trading
+- code: TOO_MANY_OPEN_ORDERS
+  message: Order quantity limit exceeded.
+  operations: [createOrders]
+  paths: ['POST /v2/orders']
+  area: trading
+- code: TRY_AGAIN
+  message: The order is currently being processed. Please try again in a few moments later.
+  operations: [deleteOrders]
+  paths: ['DELETE /v2/orders']
+  area: trading
+  transient: true
+- code: UNREGISTERED_WITHDRAWAL_ADDRESS
+  message: The address hasn't been registered as an OpenAPI withdrawal address.
+  operations: [createCoinWithdrawal]
+  paths: ['POST /v2/coin/withdrawal']
+  area: withdrawal
+- code: WITHDRAWAL_ALREADY_FINISHED
+  message: The withdrawal has already been finished.
+  operations: [deleteCoinWithdrawal]
+  paths: ['DELETE /v2/coin/withdrawal']
+  area: withdrawal
+- code: WITHDRAWAL_ALREADY_IN_PROGRESS
+  message: >-
+    A withdrawal is already in progress. Please try again after the current transaction is completed.
+  operations: [createCoinWithdrawal]
+  paths: ['POST /v2/coin/withdrawal']
+  area: withdrawal
+- code: WITHDRAWAL_SUSPENDED
+  message: Withdrawal suspended.
+  operations: [createCoinWithdrawal]
+  paths: ['POST /v2/coin/withdrawal']
+  area: withdrawal
+websocket_errors:
+  note: >-
+    WebSocket control messages carry a `status` field; data messages do not. Failures look like
+    {"requestId": 1, "status": "fail", "code": "INVALID_SYMBOL", "message": "..."} or
+    {"status": "error", "message": "..."}.
+  codes:
+  - code: INVALID_SYMBOL
+    context: subscribe control message
+order_statuses:
+  note: >-
+    Not errors, but the status values a client must handle to know whether an order succeeded.
+  values:
+  - value: pending
+    meaning: >-
+      Order pending. When the balance is insufficient or a timeInForce condition is triggered, the
+      order may fail and change to `expired`.
+  - value: open
+    meaning: Fully unfilled.
+  - value: filled
+    meaning: >-
+      Execution closed. An order whose unfilled remainder is returned instead of resting on the book
+      (e.g. an `ioc` order, or a price-protected order trimmed by the protection range) also closes
+      as `filled` even when less than the requested quantity executed — confirm with
+      filledQty/filledAmt.
+  - value: canceled
+    meaning: Fully canceled.
+  - value: partiallyFilled
+    meaning: Partially filled.
+  - value: partiallyFilledCanceled
+    meaning: Partially filled and remaining amount canceled.
+  - value: expired
+    meaning: Order submission failed (insufficient balance or timeInForce conditions).
+sandbox_only:
+  note: Emitted by the local sandbox mock only; never returned by production.
+  codes:
+  - code: SANDBOX_MARKET_DATA_UNAVAILABLE
+    http_status: 503
+    meaning: A live-mirrored pair has no data yet. Retry shortly.
+related:
+  conventions: conventions/korbit-conventions.yml
+  openapi: openapi/korbit-openapi.yml
