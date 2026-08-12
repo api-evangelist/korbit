@@ -177,7 +177,7 @@ common:
 - type: LLMsTxt
   url: llms/korbit-llms.txt
 - type: OpenAPI
-  url: openapi/korbit-openapi.yml
+  url: openapi/_original/korbit-openapi.yml
 - type: AsyncAPI
   url: asyncapi/korbit-websocket-asyncapi.yml
 - type: Webhooks
