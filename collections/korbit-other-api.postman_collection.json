@@ -1,0 +1,1846 @@
+{
+  "item": [
+    {
+      "id": "7a4df789-705a-4861-9451-df51088aeb62",
+      "name": "Other",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "57b173da-70f8-483d-86e3-1f6249f4283b",
+          "name": "Get Recent Deposits",
+          "request": {
+            "name": "Get Recent Deposits",
+            "description": {
+              "content": "Get recent deposit history.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "coin",
+                "recentDeposits"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "accountSeq",
+                  "value": "<number>",
+                  "description": "Account sequence number. Deposit/withdrawal APIs only operate on the main account, so only `1` is accepted. Defaults to 1."
+                },
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "(Required) symbol of the asset."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<number>",
+                  "description": "Maximum number of queries (range: 1 to 100)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-KAPI-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ed2fc5b2-8401-4a60-b0b4-cc95af8baf82",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "coin",
+                    "recentDeposits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "btc"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"data\": [\n    {\n      \"id\": 1234,\n      \"network\": \"BTC\",\n      \"address\": \"1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa\",\n      \"secondaryAddress\": null,\n      \"status\": \"done\",\n      \"transactionHash\": \"0x000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f\",\n      \"currency\": \"btc\",\n      \"quantity\": \"1.234\",\n      \"createdAt\": 1700000000000\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c8f42f28-08bd-4b39-b266-8fb58c603c1a",
+              "name": "Bad request — see the error envelope and error codes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "coin",
+                    "recentDeposits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "btc"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "47211108-395a-469d-88f1-43e723d00786",
+              "name": "Missing or invalid API key / signature.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "coin",
+                    "recentDeposits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "btc"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "68920e57-b143-4afb-b235-1451eeb2328f",
+              "name": "API key lacks the required permission or the IP is not allowlisted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "coin",
+                    "recentDeposits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "btc"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "68cd937a-ba65-4226-baa4-186094f330bb",
+              "name": "Rate limit exceeded. Honor `Retry-After` / the `Ratelimit` reset window.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "coin",
+                    "recentDeposits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "btc"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "164fe4c9-e462-413f-90ce-9ebe45698624",
+          "name": "Get Recent Withdrawals",
+          "request": {
+            "name": "Get Recent Withdrawals",
+            "description": {
+              "content": "Get recent cryptocurrency withdrawal history.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "coin",
+                "recentWithdrawals"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "accountSeq",
+                  "value": "<number>",
+                  "description": "Account sequence number. Deposit/withdrawal APIs only operate on the main account, so only `1` is accepted. Defaults to 1."
+                },
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "(Required) symbol of the asset."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<number>",
+                  "description": "Maximum number of queries (Range: 1 to 100)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-KAPI-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "700f243b-6184-446c-94ee-dd5caec4bbba",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "coin",
+                    "recentWithdrawals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "btc"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"data\": [\n    {\n      \"id\": 1234,\n      \"quantity\": \"1.234\",\n      \"fee\": \"0.0001\",\n      \"currency\": \"btc\",\n      \"status\": \"done\",\n      \"network\": \"BTC\",\n      \"address\": \"1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa\",\n      \"secondaryAddress\": null,\n      \"transactionHash\": \"0x000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f\",\n      \"createdAt\": 1700000000000\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "70ac5fbe-497e-4249-8edb-72538e11086a",
+              "name": "Bad request — see the error envelope and error codes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "coin",
+                    "recentWithdrawals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "btc"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7bc082fd-962a-42b5-82ae-ef6263e92a43",
+              "name": "Missing or invalid API key / signature.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "coin",
+                    "recentWithdrawals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "btc"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f8525d3c-b73f-43fd-98c0-f73b1defa9d4",
+              "name": "API key lacks the required permission or the IP is not allowlisted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "coin",
+                    "recentWithdrawals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "btc"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6ea1bdd5-76b0-4be6-9608-f32654ae42f8",
+              "name": "Rate limit exceeded. Honor `Retry-After` / the `Ratelimit` reset window.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "coin",
+                    "recentWithdrawals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "btc"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a319621d-407d-4850-a52a-1745f726c45b",
+          "name": "Get Crypto Info",
+          "request": {
+            "name": "Get Crypto Info",
+            "description": {
+              "content": "Get cryptocurrencies information.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "currencies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0f823042-4159-4822-8f1f-fd643ad94f3d",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "currencies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"data\": [\n    {\n      \"name\": \"krw\",\n      \"fullName\": \"Won\",\n      \"withdrawalMaxAmountPerRequest\": \"5000000000\",\n      \"depositStatus\": \"launched\",\n      \"withdrawalStatus\": \"launched\",\n      \"withdrawalTxFee\": \"1000\",\n      \"withdrawalMinAmount\": \"1000\"\n    },\n    {\n      \"name\": \"btc\",\n      \"fullName\": \"Bitcoin\",\n      \"withdrawalMaxAmountPerRequest\": \"120\",\n      \"defaultNetwork\": \"BTC\",\n      \"networkList\": [\n        {\n          \"name\": \"BTC\",\n          \"fullName\": \"Bitcoin\",\n          \"depositStatus\": \"launched\",\n          \"withdrawalStatus\": \"launched\",\n          \"confirmationCount\": 3,\n          \"withdrawalTxFee\": \"0.0008\",\n          \"withdrawalMinAmount\": \"0.0001\",\n          \"withdrawalPrecision\": 8,\n          \"hasSecondaryAddr\": false,\n          \"addressExplorerUrl\": \"https://www.blockchain.com/ko/btc/address/\"\n        }\n      ],\n      \"depositStatus\": \"launched\",\n      \"withdrawalStatus\": \"launched\",\n      \"confirmationCount\": \"3\",\n      \"withdrawalTxFee\": \"0.0008\",\n      \"withdrawalMinAmount\": \"0.0001\"\n    },\n    {\n      \"name\": \"eth\",\n      \"fullName\": \"Ethereum\",\n      \"withdrawalMaxAmountPerRequest\": \"2000\",\n      \"defaultNetwork\": \"ETH\",\n      \"networkList\": [\n        {\n          \"name\": \"ETH\",\n          \"fullName\": \"Ethereum\",\n          \"depositStatus\": \"launched\",\n          \"withdrawalStatus\": \"launched\",\n          \"confirmationCount\": 45,\n          \"withdrawalTxFee\": \"0.005\",\n          \"withdrawalMinAmount\": \"0.0001\",\n          \"withdrawalPrecision\": 8,\n          \"hasSecondaryAddr\": false,\n          \"addressExplorerUrl\": \"https://etherscan.io/address/\"\n        },\n        {\n          \"name\": \"BASE\",\n          \"fullName\": \"BASE\",\n          \"depositStatus\": \"launched\",\n          \"withdrawalStatus\": \"launched\",\n          \"confirmationCount\": 1,\n          \"withdrawalTxFee\": \"0.001\",\n          \"withdrawalMinAmount\": \"0.0001\",\n          \"withdrawalPrecision\": 8,\n          \"hasSecondaryAddr\": false,\n          \"addressExplorerUrl\": \"https://basescan.org/address/\"\n        }\n      ],\n      \"depositStatus\": \"launched\",\n      \"withdrawalStatus\": \"launched\",\n      \"confirmationCount\": \"45\",\n      \"withdrawalTxFee\": \"0.005\",\n      \"withdrawalMinAmount\": \"0.0001\"\n    },\n    {\n      \"name\": \"usdt\",\n      \"fullName\": \"Tether\",\n      \"withdrawalMaxAmountPerRequest\": \"500000\",\n      \"defaultNetwork\": \"TRX\",\n      \"networkList\": [\n        {\n          \"name\": \"TRX\",\n          \"fullName\": \"Tron\",\n          \"depositStatus\": \"launched\",\n          \"withdrawalStatus\": \"launched\",\n          \"confirmationCount\": 1,\n          \"withdrawalTxFee\": \"1\",\n          \"withdrawalMinAmount\": \"1\",\n          \"withdrawalPrecision\": 6,\n          \"hasSecondaryAddr\": false,\n          \"addressExplorerUrl\": \"https://tronscan.org/#/address/\"\n        }\n      ],\n      \"depositStatus\": \"launched\",\n      \"withdrawalStatus\": \"launched\",\n      \"confirmationCount\": \"1\",\n      \"withdrawalTxFee\": \"1\",\n      \"withdrawalMinAmount\": \"1\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ed51c0ec-5517-42d4-b4a2-c357877122e7",
+              "name": "Bad request — see the error envelope and error codes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "currencies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "280368da-fb8a-416f-bc50-9e2d16ccfdb3",
+              "name": "Rate limit exceeded. Honor `Retry-After` / the `Ratelimit` reset window.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "currencies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6b69b597-5777-433d-9508-9201bbaee688",
+          "name": "Get Server Time",
+          "request": {
+            "name": "Get Server Time",
+            "description": {
+              "content": "Get the current server time.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "time"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "efa2f200-b204-4204-b2f0-99d0162f6eae",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "time"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"data\": {\n    \"time\": 1700000000000\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "defeb2c4-2714-45bd-bfa3-b6f4e85e4ba2",
+              "name": "Bad request — see the error envelope and error codes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "time"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "31d41bae-1658-4373-a327-1be0718a7541",
+              "name": "Rate limit exceeded. Honor `Retry-After` / the `Ratelimit` reset window.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "time"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "32a26067-69aa-4872-a537-c6de2f778807",
+          "name": "Get Trading Fee Rates",
+          "request": {
+            "name": "Get Trading Fee Rates",
+            "description": {
+              "content": "Get the trading fee rates applied to your account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "tradingFeePolicy"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "accountSeq",
+                  "value": "<number>",
+                  "description": "Account sequence number. Defaults to 1 (main account)."
+                },
+                {
+                  "disabled": false,
+                  "key": "symbol",
+                  "value": "<string>",
+                  "description": "Enter the symbols of the trading pairs to query. To input multiple trading pairs, separate them with commas(,). If omitted, information for all available trading pairs on Korbit will be returned."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-KAPI-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "dd89cf4b-24d2-4876-b920-aacc1888879f",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "tradingFeePolicy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "key": "symbol",
+                      "value": "btc_krw,eth_krw"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"data\": [\n    {\n      \"symbol\": \"btc_krw\",\n      \"buyFeeCurrency\": \"btc\",\n      \"sellFeeCurrency\": \"krw\",\n      \"maxFeeRate\": \"0.002\",\n      \"takerFeeRate\": \"0.0015\",\n      \"makerFeeRate\": \"0\"\n    },\n    {\n      \"symbol\": \"eth_krw\",\n      \"buyFeeCurrency\": \"eth\",\n      \"sellFeeCurrency\": \"krw\",\n      \"maxFeeRate\": \"0.002\",\n      \"takerFeeRate\": \"0.0015\",\n      \"makerFeeRate\": \"0\"\n    },\n    {\n      \"symbol\": \"etc_krw\",\n      \"buyFeeCurrency\": \"krw\",\n      \"sellFeeCurrency\": \"krw\",\n      \"maxFeeRate\": \"0.002\",\n      \"takerFeeRate\": \"0.0015\",\n      \"makerFeeRate\": \"0\"\n    },\n    {\n      \"symbol\": \"xrp_krw\",\n      \"buyFeeCurrency\": \"krw\",\n      \"sellFeeCurrency\": \"krw\",\n      \"maxFeeRate\": \"0.002\",\n      \"takerFeeRate\": \"0.0015\",\n      \"makerFeeRate\": \"0\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d8551a22-e3cc-49ce-9190-b58b11c314ec",
+              "name": "Bad request — see the error envelope and error codes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "tradingFeePolicy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "key": "symbol",
+                      "value": "btc_krw,eth_krw"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7fd42098-76ca-4e84-99c9-9ae194e4d9f3",
+              "name": "Missing or invalid API key / signature.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "tradingFeePolicy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "key": "symbol",
+                      "value": "btc_krw,eth_krw"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d5a5a459-6c50-46ac-8c74-289e0fd98fe1",
+              "name": "API key lacks the required permission or the IP is not allowlisted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "tradingFeePolicy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "key": "symbol",
+                      "value": "btc_krw,eth_krw"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f11deab8-b368-4ec2-b0e0-8057185ff1be",
+              "name": "Rate limit exceeded. Honor `Retry-After` / the `Ratelimit` reset window.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "tradingFeePolicy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "key": "symbol",
+                      "value": "btc_krw,eth_krw"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1484279d-166b-41ed-aad9-d9440f7de0ae",
+          "name": "Get API Key Info",
+          "request": {
+            "name": "Get API Key Info",
+            "description": {
+              "content": "Get current API Key's information.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "currentKeyInfo"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-KAPI-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "deb83dbb-d105-4050-b026-167562c71f87",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "currentKeyInfo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"data\": {\n    \"apiKey\": \"FFSoRME97Sr7WBCMZJ_NO5Bj8MZ03EyArRzqyr1NKIA\",\n    \"userUuid\": \"f81d4fae-7dec-11d0-a765-00a0c91e6bf6\",\n    \"type\": \"ed25519\",\n    \"publicKey\": \"-----BEGIN PUBLIC KEY-----\\nMCowBQYDK2VwAyEAk+Yp3C31eFwoky+zyRNB6rAv/lgULTeghxTQpqwQHzM=\\n-----END PUBLIC KEY-----\\n\",\n    \"permissions\": [\n      \"readBalances\",\n      \"readOrders\"\n    ],\n    \"whitelist\": \"1.2.3.4,5.6.7.8\",\n    \"allowedAccountSeqs\": [\n      1,\n      2\n    ],\n    \"expiration\": 1700000000000,\n    \"status\": \"activated\",\n    \"label\": \"test key\",\n    \"createdAt\": 1700000000000\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "37ddd092-8e68-49ef-8a8b-292135f94f23",
+              "name": "Bad request — see the error envelope and error codes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "currentKeyInfo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aec6da0b-57ca-4167-91a9-9e408204eb80",
+              "name": "Rate limit exceeded. Honor `Retry-After` / the `Ratelimit` reset window.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "currentKeyInfo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "db65ff30-1f7f-4ba1-b97d-ad937f645ad7",
+          "name": "Get Notices",
+          "request": {
+            "name": "Get Notices",
+            "description": {
+              "content": "Get the 20 most recent Korbit notices (announcements), most recent first.\nIncludes both general Korbit notices and Open API (developer center) notices.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "notices"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "84fdc741-0c39-438e-a106-c1e13b442b2b",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "notices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"data\": [\n    {\n      \"title\": \"공지사항 제목 샘플\",\n      \"createdAt\": 1700000000000,\n      \"updatedAt\": 1700000000000,\n      \"url\": \"https://www.korbit.co.kr/notice/detail/?noticeId=4Oy9q6ALiM7jABzMt32ul5\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a2fccba8-3d00-4378-8083-32faa05e596d",
+              "name": "Bad request — see the error envelope and error codes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "notices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "27b11dae-de4d-475d-90fe-1eaa472c4c63",
+              "name": "Rate limit exceeded. Honor `Retry-After` / the `Ratelimit` reset window.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "notices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "89d6085c-e4c4-4068-afcd-26ce33bfdf25",
+          "name": "Get Market Alerts",
+          "request": {
+            "name": "Get Market Alerts",
+            "description": {
+              "content": "Get the current market alert (Market Warning System, 시장경보제) status for each trading pair. Returns only pairs that currently have active alerts.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "marketAlerts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a7ac47a7-a6bf-4e7d-a980-1fd9a5c7d5be",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "marketAlerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"data\": [\n    {\n      \"symbol\": \"btc_krw\",\n      \"alerts\": [\n        {\n          \"type\": \"price\",\n          \"typeKorean\": \"가격 급등락\",\n          \"level\": \"danger\",\n          \"levelKorean\": \"투자위험\",\n          \"startAt\": 1700000000000,\n          \"endAt\": 1700000000000,\n          \"value\": \"250.5\"\n        },\n        {\n          \"type\": \"limit_buy_range\",\n          \"typeKorean\": \"주문가격 제한\",\n          \"startAt\": 1700000000000,\n          \"endAt\": 1700000000000,\n          \"value\": \"145000000\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a4c31a97-34c5-4737-b525-33ba62835507",
+              "name": "Bad request — see the error envelope and error codes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "marketAlerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "92ddc89d-68ed-476c-b52e-637cb12d6146",
+              "name": "Rate limit exceeded. Honor `Retry-After` / the `Ratelimit` reset window.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "marketAlerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.korbit.co.kr",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "c73aa5b7-7eca-459a-b65e-af8f0e15be3c",
+    "name": "Korbit Open API v2 Asset Other API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for the Korbit cryptocurrency exchange (Korea's first virtual-asset exchange). Covers market data (quotation), trading, balances, crypto deposits and withdrawals, and KRW deposit/withdrawal push notifications.\n\nAll responses use the envelope `{\"success\": true, \"data\": ...}`; errors use `{\"success\": false, \"error\": {\"message\": \"<CODE>\"}}`.\n\nPrivate endpoints require the `X-KAPI-KEY` header plus `timestamp` and `signature` parameters. Signatures are HMAC-SHA256 (hex) or ED25519 (Base64, URL-encoded) over the exact encoded request string. See the timestamp-window rules: `recvWindow` defaults to 5000 ms, maximum 60000 ms, and the future bound is a fixed +1000 ms.\n\nThis document was generated by the API Evangelist enrichment pipeline from Korbit's own published agent documentation bundle (https://docs.korbit.co.kr/llms-full.txt). Korbit does not publish an OpenAPI document; this is a faithful transcription of the published reference, not an official artifact.\n\nContact Support:\n Name: Korbit Developers",
+      "type": "text/plain"
+    }
+  }
+}

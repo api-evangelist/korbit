@@ -1,0 +1,1989 @@
+{
+  "item": [
+    {
+      "id": "db4c9233-ee56-460f-b7cd-52efa9f7ad31",
+      "name": "Withdrawal (Crypto)",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f44f1ccf-1f52-413f-b24a-99a0b38c396e",
+          "name": "Get Address",
+          "request": {
+            "name": "Get Address",
+            "description": {
+              "content": "Retrieve the list of addresses registered for API withdrawals.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "coin",
+                "withdrawableAddresses"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "accountSeq",
+                  "value": "<number>",
+                  "description": "Account sequence number. Deposit/withdrawal APIs only operate on the main account, so only `1` is accepted. Defaults to 1."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-KAPI-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c9db1d0b-623d-4ad9-a95e-4b11c817c4e4",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "coin",
+                    "withdrawableAddresses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountSeq",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"data\": [\n    {\n      \"network\": \"BTC\",\n      \"currency\": \"btc\",\n      \"address\": \"1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa\"\n    },\n    {\n      \"network\": \"ETH\",\n      \"address\": \"0x05a56e2d52c817161883f50c441c3228cfe54d9f\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8efee956-22d3-4cff-a6ca-54c06bfbdc12",
+              "name": "Bad request — see the error envelope and error codes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "coin",
+                    "withdrawableAddresses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountSeq",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e012cfbc-4074-4153-852a-fd9c3a7b00e3",
+              "name": "Missing or invalid API key / signature.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "coin",
+                    "withdrawableAddresses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountSeq",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2c119917-cb0e-425d-9f16-2f826ab40b3f",
+              "name": "API key lacks the required permission or the IP is not allowlisted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "coin",
+                    "withdrawableAddresses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountSeq",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "92f75e22-f52e-43fc-b004-0ffd13ac643e",
+              "name": "Rate limit exceeded. Honor `Retry-After` / the `Ratelimit` reset window.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "coin",
+                    "withdrawableAddresses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountSeq",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "67c3a67b-1a4f-42e9-9c6b-698051789d5e",
+          "name": "Get Withdrawable Amount",
+          "request": {
+            "name": "Get Withdrawable Amount",
+            "description": {
+              "content": "Get the available cryptocurrency withdrawal amount.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "coin",
+                "withdrawableAmount"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "accountSeq",
+                  "value": "<number>",
+                  "description": "Account sequence number. Deposit/withdrawal APIs only operate on the main account, so only `1` is accepted. Defaults to 1."
+                },
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "Symbol of the cryptocurrency to query. If not provided, all assets will be queried."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-KAPI-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "5a92f838-505f-4263-8718-61888171e87a",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "coin",
+                    "withdrawableAmount"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "btc"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"data\": [\n    {\n      \"currency\": \"btc\",\n      \"withdrawableAmount\": \"1.52\",\n      \"withdrawalInUseAmount\": \"0.005\"\n    },\n    {\n      \"currency\": \"eth\",\n      \"withdrawableAmount\": \"10.52\",\n      \"withdrawalInUseAmount\": \"2.5\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1b92fcc4-77ff-408c-81bc-7c3efcb94ca6",
+              "name": "Bad request — see the error envelope and error codes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "coin",
+                    "withdrawableAmount"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "btc"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "234af893-b9b5-44ac-b4a9-674737b79fd7",
+              "name": "Missing or invalid API key / signature.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "coin",
+                    "withdrawableAmount"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "btc"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "79477033-ee71-40eb-a3f8-283c5574ef4d",
+              "name": "API key lacks the required permission or the IP is not allowlisted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "coin",
+                    "withdrawableAmount"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "btc"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "899d30f9-c2b7-401a-a275-5eab0d1e59d1",
+              "name": "Rate limit exceeded. Honor `Retry-After` / the `Ratelimit` reset window.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "coin",
+                    "withdrawableAmount"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "btc"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8dedc8f7-7032-49b7-98d1-f9045fe185db",
+          "name": "Request Withdrawal",
+          "request": {
+            "name": "Request Withdrawal",
+            "description": {
+              "content": "Request for cryptocurrency withdrawal. You need to register your withdrawal addresses for use with API in order to use this feature.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "coin",
+                "withdrawal"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-KAPI-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "(Required) symbol of the asset."
+                },
+                {
+                  "disabled": false,
+                  "key": "amount",
+                  "value": "<string>",
+                  "description": "(Required) amount of cryptocurrency to withdraw (not including fees)."
+                },
+                {
+                  "disabled": false,
+                  "key": "address",
+                  "value": "<string>",
+                  "description": "(Required) Recipient address. Withdrawals can only be made to addresses registered for API withdrawals."
+                },
+                {
+                  "disabled": false,
+                  "key": "accountSeq",
+                  "value": "<number>",
+                  "description": "Account sequence number. Deposit/withdrawal APIs only operate on the main account, so only `1` is accepted. Defaults to 1."
+                },
+                {
+                  "disabled": false,
+                  "key": "network",
+                  "value": "<string>",
+                  "description": "symbol of the blockchain network. List of networks can be queried using the `/v2/currencies` API. Uses the default network if omitted. Please always specify the network to prevent possible errors, as the default network can be changed."
+                },
+                {
+                  "disabled": false,
+                  "key": "secondaryAddress",
+                  "value": "<string>",
+                  "description": "secondary address (destination tag, memo, etc. if none, omit or set to an empty string.)"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "9274801f-fd89-4930-ab9d-99672ff09647",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "coin",
+                    "withdrawal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) symbol of the asset.",
+                        "type": "text/plain"
+                      },
+                      "key": "currency",
+                      "value": "btc"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) amount of cryptocurrency to withdraw (not including fees).",
+                        "type": "text/plain"
+                      },
+                      "key": "amount",
+                      "value": "0.02521236"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Recipient address. Withdrawals can only be made to addresses registered for API withdrawals.",
+                        "type": "text/plain"
+                      },
+                      "key": "address",
+                      "value": "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Account sequence number. Deposit/withdrawal APIs only operate on the main account, so only `1` is accepted. Defaults to 1.",
+                        "type": "text/plain"
+                      },
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "symbol of the blockchain network. List of networks can be queried using the `/v2/currencies` API. Uses the default network if omitted. Please always specify the network to prevent possible errors, as the default network can be changed.",
+                        "type": "text/plain"
+                      },
+                      "key": "network",
+                      "value": "BTC"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "secondary address (destination tag, memo, etc. if none, omit or set to an empty string.)",
+                        "type": "text/plain"
+                      },
+                      "key": "secondaryAddress",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"data\": {\n    \"status\": \"pending\",\n    \"coinWithdrawalId\": 1234\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1cd74f02-656f-46d4-b725-ae67d7a05bbc",
+              "name": "Bad request — see the error envelope and error codes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "coin",
+                    "withdrawal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) symbol of the asset.",
+                        "type": "text/plain"
+                      },
+                      "key": "currency",
+                      "value": "btc"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) amount of cryptocurrency to withdraw (not including fees).",
+                        "type": "text/plain"
+                      },
+                      "key": "amount",
+                      "value": "0.02521236"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Recipient address. Withdrawals can only be made to addresses registered for API withdrawals.",
+                        "type": "text/plain"
+                      },
+                      "key": "address",
+                      "value": "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Account sequence number. Deposit/withdrawal APIs only operate on the main account, so only `1` is accepted. Defaults to 1.",
+                        "type": "text/plain"
+                      },
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "symbol of the blockchain network. List of networks can be queried using the `/v2/currencies` API. Uses the default network if omitted. Please always specify the network to prevent possible errors, as the default network can be changed.",
+                        "type": "text/plain"
+                      },
+                      "key": "network",
+                      "value": "BTC"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "secondary address (destination tag, memo, etc. if none, omit or set to an empty string.)",
+                        "type": "text/plain"
+                      },
+                      "key": "secondaryAddress",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7e353af0-17ee-4270-b11f-606376ee8108",
+              "name": "Missing or invalid API key / signature.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "coin",
+                    "withdrawal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) symbol of the asset.",
+                        "type": "text/plain"
+                      },
+                      "key": "currency",
+                      "value": "btc"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) amount of cryptocurrency to withdraw (not including fees).",
+                        "type": "text/plain"
+                      },
+                      "key": "amount",
+                      "value": "0.02521236"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Recipient address. Withdrawals can only be made to addresses registered for API withdrawals.",
+                        "type": "text/plain"
+                      },
+                      "key": "address",
+                      "value": "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Account sequence number. Deposit/withdrawal APIs only operate on the main account, so only `1` is accepted. Defaults to 1.",
+                        "type": "text/plain"
+                      },
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "symbol of the blockchain network. List of networks can be queried using the `/v2/currencies` API. Uses the default network if omitted. Please always specify the network to prevent possible errors, as the default network can be changed.",
+                        "type": "text/plain"
+                      },
+                      "key": "network",
+                      "value": "BTC"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "secondary address (destination tag, memo, etc. if none, omit or set to an empty string.)",
+                        "type": "text/plain"
+                      },
+                      "key": "secondaryAddress",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cff29ee2-9ea6-44fb-a71c-def9f69cad2b",
+              "name": "API key lacks the required permission or the IP is not allowlisted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "coin",
+                    "withdrawal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) symbol of the asset.",
+                        "type": "text/plain"
+                      },
+                      "key": "currency",
+                      "value": "btc"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) amount of cryptocurrency to withdraw (not including fees).",
+                        "type": "text/plain"
+                      },
+                      "key": "amount",
+                      "value": "0.02521236"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Recipient address. Withdrawals can only be made to addresses registered for API withdrawals.",
+                        "type": "text/plain"
+                      },
+                      "key": "address",
+                      "value": "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Account sequence number. Deposit/withdrawal APIs only operate on the main account, so only `1` is accepted. Defaults to 1.",
+                        "type": "text/plain"
+                      },
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "symbol of the blockchain network. List of networks can be queried using the `/v2/currencies` API. Uses the default network if omitted. Please always specify the network to prevent possible errors, as the default network can be changed.",
+                        "type": "text/plain"
+                      },
+                      "key": "network",
+                      "value": "BTC"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "secondary address (destination tag, memo, etc. if none, omit or set to an empty string.)",
+                        "type": "text/plain"
+                      },
+                      "key": "secondaryAddress",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bb6cf26e-eba0-4b40-a37d-549a7ad1b867",
+              "name": "Rate limit exceeded. Honor `Retry-After` / the `Ratelimit` reset window.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "coin",
+                    "withdrawal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) symbol of the asset.",
+                        "type": "text/plain"
+                      },
+                      "key": "currency",
+                      "value": "btc"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) amount of cryptocurrency to withdraw (not including fees).",
+                        "type": "text/plain"
+                      },
+                      "key": "amount",
+                      "value": "0.02521236"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Recipient address. Withdrawals can only be made to addresses registered for API withdrawals.",
+                        "type": "text/plain"
+                      },
+                      "key": "address",
+                      "value": "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Account sequence number. Deposit/withdrawal APIs only operate on the main account, so only `1` is accepted. Defaults to 1.",
+                        "type": "text/plain"
+                      },
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "symbol of the blockchain network. List of networks can be queried using the `/v2/currencies` API. Uses the default network if omitted. Please always specify the network to prevent possible errors, as the default network can be changed.",
+                        "type": "text/plain"
+                      },
+                      "key": "network",
+                      "value": "BTC"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "secondary address (destination tag, memo, etc. if none, omit or set to an empty string.)",
+                        "type": "text/plain"
+                      },
+                      "key": "secondaryAddress",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1fa68155-7bfc-450b-9a2b-b1bdf551c47b",
+          "name": "Cancel Withdrawal",
+          "request": {
+            "name": "Cancel Withdrawal",
+            "description": {
+              "content": "Cancel a cryptocurrency withdrawal.\nWithdrawals can only be canceled if the status is one of the following:\n- `actionRequired`\n- `reviewing`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "coin",
+                "withdrawal"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "accountSeq",
+                  "value": "<number>",
+                  "description": "Account sequence number. Deposit/withdrawal APIs only operate on the main account, so only `1` is accepted. Defaults to 1."
+                },
+                {
+                  "disabled": false,
+                  "key": "coinWithdrawalId",
+                  "value": "<number>",
+                  "description": "(Required) withdrawal ID (responsed by `POST /v2/coin/withdrawal`)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-KAPI-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "54fc25ef-9f64-4d38-981a-0eeecbb5e15d",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "coin",
+                    "withdrawal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "key": "coinWithdrawalId",
+                      "value": "1234"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c9ee8c48-7611-4bea-8a1e-f14d63518062",
+              "name": "Bad request — see the error envelope and error codes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "coin",
+                    "withdrawal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "key": "coinWithdrawalId",
+                      "value": "1234"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fa8b6db4-59c4-4d21-830b-eaf12bd55914",
+              "name": "Missing or invalid API key / signature.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "coin",
+                    "withdrawal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "key": "coinWithdrawalId",
+                      "value": "1234"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9b9295ae-0991-42a6-bef2-e2d50dfd97eb",
+              "name": "API key lacks the required permission or the IP is not allowlisted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "coin",
+                    "withdrawal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "key": "coinWithdrawalId",
+                      "value": "1234"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9e303293-4cdc-4c2b-864a-6106bcde0606",
+              "name": "Rate limit exceeded. Honor `Retry-After` / the `Ratelimit` reset window.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "coin",
+                    "withdrawal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "key": "coinWithdrawalId",
+                      "value": "1234"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4c436d96-1cc1-48c4-b2e3-d684e8188d8c",
+          "name": "Get Withdrawal Status",
+          "request": {
+            "name": "Get Withdrawal Status",
+            "description": {
+              "content": "Get the status of the requested withdrawal.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "coin",
+                "withdrawal"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "accountSeq",
+                  "value": "<number>",
+                  "description": "Account sequence number. Deposit/withdrawal APIs only operate on the main account, so only `1` is accepted. Defaults to 1."
+                },
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "(Required) symbol of the asset."
+                },
+                {
+                  "disabled": false,
+                  "key": "coinWithdrawalId",
+                  "value": "<number>",
+                  "description": "(Required) withdrawal ID."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-KAPI-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "36b7db99-49df-4d8d-824c-72be2a82c045",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "coin",
+                    "withdrawal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "btc"
+                    },
+                    {
+                      "key": "coinWithdrawalId",
+                      "value": "1234"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"data\": {\n    \"id\": 1234,\n    \"quantity\": \"1.234\",\n    \"fee\": \"0.0001\",\n    \"currency\": \"btc\",\n    \"status\": \"done\",\n    \"network\": \"BTC\",\n    \"address\": \"1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa\",\n    \"secondaryAddress\": null,\n    \"transactionHash\": \"0x000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f\",\n    \"createdAt\": 1700000000000\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7f6d6fc4-5cd5-4009-b65a-fac2b548ebfb",
+              "name": "Bad request — see the error envelope and error codes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "coin",
+                    "withdrawal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "btc"
+                    },
+                    {
+                      "key": "coinWithdrawalId",
+                      "value": "1234"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e05d6e7c-5885-4138-a526-641b8c8a2151",
+              "name": "Missing or invalid API key / signature.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "coin",
+                    "withdrawal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "btc"
+                    },
+                    {
+                      "key": "coinWithdrawalId",
+                      "value": "1234"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "17711674-bb95-4f63-b074-71b7e0c89a61",
+              "name": "API key lacks the required permission or the IP is not allowlisted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "coin",
+                    "withdrawal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "btc"
+                    },
+                    {
+                      "key": "coinWithdrawalId",
+                      "value": "1234"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ce55f8d8-6697-46bc-859f-c39e2f0a0754",
+              "name": "Rate limit exceeded. Honor `Retry-After` / the `Ratelimit` reset window.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "coin",
+                    "withdrawal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "btc"
+                    },
+                    {
+                      "key": "coinWithdrawalId",
+                      "value": "1234"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.korbit.co.kr",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "57a2d216-fb50-4432-8847-857b147bd284",
+    "name": "Korbit Open API v2 Asset Withdrawal (Crypto) API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for the Korbit cryptocurrency exchange (Korea's first virtual-asset exchange). Covers market data (quotation), trading, balances, crypto deposits and withdrawals, and KRW deposit/withdrawal push notifications.\n\nAll responses use the envelope `{\"success\": true, \"data\": ...}`; errors use `{\"success\": false, \"error\": {\"message\": \"<CODE>\"}}`.\n\nPrivate endpoints require the `X-KAPI-KEY` header plus `timestamp` and `signature` parameters. Signatures are HMAC-SHA256 (hex) or ED25519 (Base64, URL-encoded) over the exact encoded request string. See the timestamp-window rules: `recvWindow` defaults to 5000 ms, maximum 60000 ms, and the future bound is a fixed +1000 ms.\n\nThis document was generated by the API Evangelist enrichment pipeline from Korbit's own published agent documentation bundle (https://docs.korbit.co.kr/llms-full.txt). Korbit does not publish an OpenAPI document; this is a faithful transcription of the published reference, not an official artifact.\n\nContact Support:\n Name: Korbit Developers",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,1111 @@
+{
+  "item": [
+    {
+      "id": "b6a9e3b2-495e-4cad-83ec-776dfb58fa5e",
+      "name": "Quotation",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ca1b3403-8532-49bb-9d1d-223e10fe0bf1",
+          "name": "Get Tickers",
+          "request": {
+            "name": "Get Tickers",
+            "description": {
+              "content": "Get latest price and trading volume for a symbol or symbols.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "tickers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "symbol",
+                  "value": "<string>",
+                  "description": "Enter the symbols of the trading pairs you want to query, separated by commas (,). If omitted, information for all available trading pairs on Korbit will be returned."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "499c8d0c-cf05-45da-b13b-877d14645783",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "tickers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbol",
+                      "value": "btc_krw,eth_krw"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"data\": [\n    {\n      \"symbol\": \"btc_krw\",\n      \"open\": \"77060000\",\n      \"high\": \"79650000\",\n      \"low\": \"76550000\",\n      \"close\": \"77136000\",\n      \"prevClose\": \"77060000\",\n      \"priceChange\": \"76000\",\n      \"priceChangePercent\": \"0.1\",\n      \"volume\": \"48.73739983\",\n      \"quoteVolume\": \"3785149733.32633\",\n      \"bestBidPrice\": \"77136000\",\n      \"bestAskPrice\": \"77193000\",\n      \"lastTradedAt\": 1725525721041\n    },\n    {\n      \"symbol\": \"eth_krw\",\n      \"open\": \"3259000\",\n      \"high\": \"3370000\",\n      \"low\": \"3222000\",\n      \"close\": \"3250000\",\n      \"prevClose\": \"3259000\",\n      \"priceChange\": \"-9000\",\n      \"priceChangePercent\": \"-0.28\",\n      \"volume\": \"161.99278306\",\n      \"quoteVolume\": \"532827941.01581\",\n      \"bestBidPrice\": \"3251000\",\n      \"bestAskPrice\": \"3254000\",\n      \"lastTradedAt\": 1725525545630\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1a470c09-54ac-4858-ad49-cc3289a4710e",
+              "name": "Bad request — see the error envelope and error codes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "tickers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbol",
+                      "value": "btc_krw,eth_krw"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "23aa9300-9e69-4389-b147-86c1e5bc6e58",
+              "name": "Rate limit exceeded. Honor `Retry-After` / the `Ratelimit` reset window.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "tickers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbol",
+                      "value": "btc_krw,eth_krw"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ce405148-6d5e-442a-9381-df9116782986",
+          "name": "Get Orderbook",
+          "request": {
+            "name": "Get Orderbook",
+            "description": {
+              "content": "Get orderbook data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "orderbook"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "symbol",
+                  "value": "<string>",
+                  "description": "(Required) Trading pair."
+                },
+                {
+                  "disabled": false,
+                  "key": "level",
+                  "value": "<string>",
+                  "description": "Orderbook grouping level. Available levels can be checked via the Get Tick Size Policy API. If not provided, grouping will not be applied."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "58344e9b-6178-4773-bc83-b9dd7e01dc5a",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orderbook"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbol",
+                      "value": "btc_krw"
+                    },
+                    {
+                      "key": "level",
+                      "value": "1000"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"data\": {\n    \"timestamp\": 1708057740895,\n    \"bids\": [\n      {\n        \"price\": \"73303000\",\n        \"qty\": \"0.00898326\"\n      },\n      {\n        \"price\": \"73302000\",\n        \"qty\": \"0.00790837\"\n      },\n      {\n        \"price\": \"73301000\",\n        \"qty\": \"0.00843099\"\n      },\n      {\n        \"price\": \"73300000\",\n        \"qty\": \"0.00054024\"\n      },\n      {\n        \"price\": \"73299000\",\n        \"qty\": \"0.00663446\"\n      }\n    ],\n    \"asks\": [\n      {\n        \"price\": \"73304000\",\n        \"qty\": \"0.00985212\"\n      },\n      {\n        \"price\": \"73305000\",\n        \"qty\": \"0.00367505\"\n      },\n      {\n        \"price\": \"73306000\",\n        \"qty\": \"0.0096254\"\n      },\n      {\n        \"price\": \"73307000\",\n        \"qty\": \"0.00502544\"\n      },\n      {\n        \"price\": \"73308000\",\n        \"qty\": \"0.00640584\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e759c727-25ec-4a52-b3ea-ffa599621bf2",
+              "name": "Bad request — see the error envelope and error codes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orderbook"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbol",
+                      "value": "btc_krw"
+                    },
+                    {
+                      "key": "level",
+                      "value": "1000"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "53292eb8-75c2-4c5c-b0cc-67b28c389253",
+              "name": "Rate limit exceeded. Honor `Retry-After` / the `Ratelimit` reset window.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orderbook"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbol",
+                      "value": "btc_krw"
+                    },
+                    {
+                      "key": "level",
+                      "value": "1000"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ad0d5b5d-6ea1-440e-affc-a00ea9832709",
+          "name": "Get Recent Trades",
+          "request": {
+            "name": "Get Recent Trades",
+            "description": {
+              "content": "Get recent trades.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "trades"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "symbol",
+                  "value": "<string>",
+                  "description": "(Required) Trading pair."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<number>",
+                  "description": "limit (range: 1 ~ 500)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f3f92b59-322f-4b5a-829b-30926dbc4122",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "trades"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbol",
+                      "value": "btc_krw"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"data\": [\n    {\n      \"timestamp\": 1708057271149,\n      \"price\": \"70507000\",\n      \"qty\": \"0.00981535\",\n      \"isBuyerTaker\": false,\n      \"tradeId\": 1004\n    },\n    {\n      \"timestamp\": 1708057271035,\n      \"price\": \"70508000\",\n      \"qty\": \"0.00682475\",\n      \"isBuyerTaker\": false,\n      \"tradeId\": 1003\n    },\n    {\n      \"timestamp\": 1708057270922,\n      \"price\": \"70509000\",\n      \"qty\": \"0.00844147\",\n      \"isBuyerTaker\": false,\n      \"tradeId\": 1002\n    },\n    {\n      \"timestamp\": 1708057270809,\n      \"price\": \"70510000\",\n      \"qty\": \"0.00553963\",\n      \"isBuyerTaker\": false,\n      \"tradeId\": 1001\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f7abe0f0-7944-4ade-a790-95ab858ef718",
+              "name": "Bad request — see the error envelope and error codes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "trades"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbol",
+                      "value": "btc_krw"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5bff2250-b07e-43b6-a6dc-13e7640754e0",
+              "name": "Rate limit exceeded. Honor `Retry-After` / the `Ratelimit` reset window.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "trades"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbol",
+                      "value": "btc_krw"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d63f20a5-ec16-4961-abb0-67109ffd4e09",
+          "name": "Get Candlesticks",
+          "request": {
+            "name": "Get Candlesticks",
+            "description": {
+              "content": "Get historical candlesticks (klines) data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "candles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "symbol",
+                  "value": "<string>",
+                  "description": "(Required) Trading pair."
+                },
+                {
+                  "disabled": false,
+                  "key": "interval",
+                  "value": "<string>",
+                  "description": "(Required) interval `1` — 1 min / `5` — 5 mins / `15` — 15 mins / `30` — 30 mins / `60` — 1 hour / `240` — 4 hours / `1D` — 1 day / `1W` — 1 week"
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<number>",
+                  "description": "start timestamp. (default: listed time)."
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<number>",
+                  "description": "end timestamp. must be larger than `start`. (default: now)."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<number>",
+                  "description": "(Required) limit (range: 1 ~ 200)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c1c4181f-777c-4119-8ac4-0802bc46f7bc",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "candles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbol",
+                      "value": "btc_krw"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "1600000000000"
+                    },
+                    {
+                      "key": "end",
+                      "value": "1700000000000"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"data\": [\n    {\n      \"timestamp\": 1708041600000,\n      \"open\": \"71211000\",\n      \"high\": \"9999990000\",\n      \"low\": \"300000\",\n      \"close\": \"71392000\",\n      \"volume\": \"1.932320026577213946\"\n    },\n    {\n      \"timestamp\": 1708045200000,\n      \"open\": \"73510000\",\n      \"high\": \"74605000\",\n      \"low\": \"300000\",\n      \"close\": \"72315000\",\n      \"volume\": \"2.418698679231323743\"\n    },\n    {\n      \"timestamp\": 1708048800000,\n      \"open\": \"72315000\",\n      \"high\": \"9999990000\",\n      \"low\": \"300000\",\n      \"close\": \"72380000\",\n      \"volume\": \"1.947520219976227299\"\n    },\n    {\n      \"timestamp\": 1708052400000,\n      \"open\": \"70267000\",\n      \"high\": \"74777000\",\n      \"low\": \"300000\",\n      \"close\": \"74049000\",\n      \"volume\": \"2.254855048982521506\"\n    },\n    {\n      \"timestamp\": 1708056000000,\n      \"open\": \"68304000\",\n      \"high\": \"74834000\",\n      \"low\": \"68241000\",\n      \"close\": \"74825000\",\n      \"volume\": \"0.630193755379195341\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4ae0036e-6c26-4e4f-98bf-59fa7f93c4ee",
+              "name": "Bad request — see the error envelope and error codes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "candles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbol",
+                      "value": "btc_krw"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "1600000000000"
+                    },
+                    {
+                      "key": "end",
+                      "value": "1700000000000"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e1361e3b-1006-4a63-a797-d73950107028",
+              "name": "Rate limit exceeded. Honor `Retry-After` / the `Ratelimit` reset window.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "candles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbol",
+                      "value": "btc_krw"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "1600000000000"
+                    },
+                    {
+                      "key": "end",
+                      "value": "1700000000000"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "786a08c2-2746-4597-b836-961ef24b4cc4",
+          "name": "Get Trading Pairs",
+          "request": {
+            "name": "Get Trading Pairs",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "currencyPairs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6301eb63-5515-40f5-a6d7-4e4b148ac376",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "currencyPairs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"data\": [\n    {\n      \"symbol\": \"btc_krw\",\n      \"status\": \"launched\"\n    },\n    {\n      \"symbol\": \"eth_krw\",\n      \"status\": \"launched\"\n    },\n    {\n      \"symbol\": \"xrp_krw\",\n      \"status\": \"stopped\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "98c13bca-9b4b-4864-8598-57008d9deb17",
+              "name": "Bad request — see the error envelope and error codes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "currencyPairs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "95d42d43-5e81-4bf9-8d7a-6cab4a0269e0",
+              "name": "Rate limit exceeded. Honor `Retry-After` / the `Ratelimit` reset window.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "currencyPairs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c7c29c08-1a86-4b69-9d71-7cb913369f94",
+          "name": "Get Tick Size Policy",
+          "request": {
+            "name": "Get Tick Size Policy",
+            "description": {
+              "content": "Get tick size policy and orderbook grouping levels for a trading pair.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "tickSizePolicy"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "symbol",
+                  "value": "<string>",
+                  "description": "(Required) Trading pair symbol."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "52372f05-cd4b-429b-a6d0-83929ba99e0a",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "tickSizePolicy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbol",
+                      "value": "xrp_krw"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"data\": [\n    {\n      \"symbol\": \"xrp_krw\",\n      \"tickSizePolicy\": [\n        {\n          \"priceGte\": \"0\",\n          \"tickSize\": \"0.0001\"\n        },\n        {\n          \"priceGte\": \"1\",\n          \"tickSize\": \"0.001\"\n        },\n        {\n          \"priceGte\": \"10\",\n          \"tickSize\": \"0.01\"\n        },\n        {\n          \"priceGte\": \"100\",\n          \"tickSize\": \"0.1\"\n        },\n        {\n          \"priceGte\": \"1000\",\n          \"tickSize\": \"1\"\n        },\n        {\n          \"priceGte\": \"5000\",\n          \"tickSize\": \"5\"\n        },\n        {\n          \"priceGte\": \"10000\",\n          \"tickSize\": \"10\"\n        },\n        {\n          \"priceGte\": \"50000\",\n          \"tickSize\": \"50\"\n        },\n        {\n          \"priceGte\": \"100000\",\n          \"tickSize\": \"100\"\n        },\n        {\n          \"priceGte\": \"500000\",\n          \"tickSize\": \"500\"\n        },\n        {\n          \"priceGte\": \"1000000\",\n          \"tickSize\": \"1000\"\n        }\n      ],\n      \"orderbookLevels\": [\n        \"0.1\",\n        \"1\",\n        \"10\",\n        \"100\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "34c09e48-49e8-4668-8767-33fc4fa6872f",
+              "name": "Bad request — see the error envelope and error codes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "tickSizePolicy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbol",
+                      "value": "xrp_krw"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9243b0d2-5ec9-4a18-b710-4331bab6f408",
+              "name": "Rate limit exceeded. Honor `Retry-After` / the `Ratelimit` reset window.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "tickSizePolicy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbol",
+                      "value": "xrp_krw"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.korbit.co.kr",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "1151e507-eaf1-4647-92ee-f1d12998ef93",
+    "name": "Korbit Open API v2 Asset Quotation API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for the Korbit cryptocurrency exchange (Korea's first virtual-asset exchange). Covers market data (quotation), trading, balances, crypto deposits and withdrawals, and KRW deposit/withdrawal push notifications.\n\nAll responses use the envelope `{\"success\": true, \"data\": ...}`; errors use `{\"success\": false, \"error\": {\"message\": \"<CODE>\"}}`.\n\nPrivate endpoints require the `X-KAPI-KEY` header plus `timestamp` and `signature` parameters. Signatures are HMAC-SHA256 (hex) or ED25519 (Base64, URL-encoded) over the exact encoded request string. See the timestamp-window rules: `recvWindow` defaults to 5000 ms, maximum 60000 ms, and the future bound is a fixed +1000 ms.\n\nThis document was generated by the API Evangelist enrichment pipeline from Korbit's own published agent documentation bundle (https://docs.korbit.co.kr/llms-full.txt). Korbit does not publish an OpenAPI document; this is a faithful transcription of the published reference, not an official artifact.\n\nContact Support:\n Name: Korbit Developers",
+      "type": "text/plain"
+    }
+  }
+}

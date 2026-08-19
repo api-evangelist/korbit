@@ -1,0 +1,160 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Korbit Open API v2 Asset Quotation API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Quotation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Tickers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.korbit.co.kr/v2/tickers",
+            "params": [
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "query",
+                "description": "Enter the symbols of the trading pairs you want to query, separated by commas (,). If omitted, information for all available trading pairs on Korbit will be returned."
+              }
+            ]
+          },
+          "docs": "Get latest price and trading volume for a symbol or symbols."
+        },
+        {
+          "info": {
+            "name": "Get Orderbook",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.korbit.co.kr/v2/orderbook",
+            "params": [
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "query",
+                "description": "Trading pair."
+              },
+              {
+                "name": "level",
+                "value": "",
+                "type": "query",
+                "description": "Orderbook grouping level. Available levels can be checked via the Get Tick Size Policy API. If not provided, grouping will not be applied."
+              }
+            ]
+          },
+          "docs": "Get orderbook data."
+        },
+        {
+          "info": {
+            "name": "Get Recent Trades",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.korbit.co.kr/v2/trades",
+            "params": [
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "query",
+                "description": "Trading pair."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "limit (range: 1 ~ 500)."
+              }
+            ]
+          },
+          "docs": "Get recent trades."
+        },
+        {
+          "info": {
+            "name": "Get Candlesticks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.korbit.co.kr/v2/candles",
+            "params": [
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "query",
+                "description": "Trading pair."
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "interval `1` — 1 min / `5` — 5 mins / `15` — 15 mins / `30` — 30 mins / `60` — 1 hour / `240` — 4 hours / `1D` — 1 day / `1W` — 1 week"
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "start timestamp. (default: listed time)."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "end timestamp. must be larger than `start`. (default: now)."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "limit (range: 1 ~ 200)."
+              }
+            ]
+          },
+          "docs": "Get historical candlesticks (klines) data."
+        },
+        {
+          "info": {
+            "name": "Get Trading Pairs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.korbit.co.kr/v2/currencyPairs"
+          },
+          "docs": "Get Trading Pairs"
+        },
+        {
+          "info": {
+            "name": "Get Tick Size Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.korbit.co.kr/v2/tickSizePolicy",
+            "params": [
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "query",
+                "description": "Trading pair symbol."
+              }
+            ]
+          },
+          "docs": "Get tick size policy and orderbook grouping levels for a trading pair."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

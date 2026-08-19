@@ -1,0 +1,151 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Korbit Open API v2 Asset Deposit (Crypto) API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Deposit (Crypto)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get All Address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.korbit.co.kr/v2/coin/depositAddresses",
+            "params": [
+              {
+                "name": "accountSeq",
+                "value": "",
+                "type": "query",
+                "description": "Account sequence number. Deposit/withdrawal APIs only operate on the main account, so only `1` is accepted. Defaults to 1."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-KAPI-KEY",
+              "value": "{{X-KAPI-KEY}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve the list of cryptocurrency deposit addresses."
+        },
+        {
+          "info": {
+            "name": "Get Single Address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.korbit.co.kr/v2/coin/depositAddress",
+            "params": [
+              {
+                "name": "accountSeq",
+                "value": "",
+                "type": "query",
+                "description": "Account sequence number. Deposit/withdrawal APIs only operate on the main account, so only `1` is accepted. Defaults to 1."
+              },
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "symbol of the asset."
+              },
+              {
+                "name": "network",
+                "value": "",
+                "type": "query",
+                "description": "symbol of the blockchain network. List of networks can be queried using the `/v2/currencies` API. Uses the default network if omitted. Please always specify the network to prevent possible errors, as the default network can be changed."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-KAPI-KEY",
+              "value": "{{X-KAPI-KEY}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get the deposit address for a single cryptocurrency."
+        },
+        {
+          "info": {
+            "name": "Generate Address",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.korbit.co.kr/v2/coin/depositAddress",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "accountSeq",
+                  "value": ""
+                },
+                {
+                  "name": "currency",
+                  "value": ""
+                },
+                {
+                  "name": "network",
+                  "value": ""
+                }
+              ]
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "X-KAPI-KEY",
+              "value": "{{X-KAPI-KEY}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Generate a cryptocurrency deposit address. If a deposit address already exists, the existing address will be returned."
+        },
+        {
+          "info": {
+            "name": "Get Deposit Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.korbit.co.kr/v2/coin/deposit",
+            "params": [
+              {
+                "name": "accountSeq",
+                "value": "",
+                "type": "query",
+                "description": "Account sequence number. Deposit/withdrawal APIs only operate on the main account, so only `1` is accepted. Defaults to 1."
+              },
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "symbol of the asset."
+              },
+              {
+                "name": "coinDepositId",
+                "value": "",
+                "type": "query",
+                "description": "deposit ID."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-KAPI-KEY",
+              "value": "{{X-KAPI-KEY}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Check the status of cryptocurrency deposits."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

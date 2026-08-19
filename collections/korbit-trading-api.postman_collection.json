@@ -1,0 +1,2881 @@
+{
+  "item": [
+    {
+      "id": "63604e0f-fc5a-4493-808f-c8432064eb6f",
+      "name": "Trading",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "79c40a29-d38f-4cf7-b09f-64da5e62771a",
+          "name": "Get Order",
+          "request": {
+            "name": "Get Order",
+            "description": {
+              "content": "Use either `orderId` or `clientOrderId` to query the status of an individual order.\nHowever, orders with the statuses `expired` or `canceled` cannot be retrieved approximately 3 days after they have been closed.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "orders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "symbol",
+                  "value": "<string>",
+                  "description": "(Required) Trading pair."
+                },
+                {
+                  "disabled": false,
+                  "key": "accountSeq",
+                  "value": "<number>",
+                  "description": "Account sequence number. Defaults to 1 (main account)."
+                },
+                {
+                  "disabled": false,
+                  "key": "orderId",
+                  "value": "<number>",
+                  "description": "Enter `orderID` (responsed by POST /v2/orders). Enter one of `orderID` or `clientOrderId`."
+                },
+                {
+                  "disabled": false,
+                  "key": "clientOrderId",
+                  "value": "<string>",
+                  "description": "Enter `clientOrderId` (requested by POST /v2/orders). Enter one of `orderID` or `clientOrderId`."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-KAPI-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "98b7ab67-d0c0-4318-bb8c-1ae63a612ad2",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbol",
+                      "value": "btc_krw"
+                    },
+                    {
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "key": "orderId",
+                      "value": "1234"
+                    },
+                    {
+                      "key": "clientOrderId",
+                      "value": "20141231-155959-abcdef"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"data\": {\n    \"orderId\": 1234,\n    \"clientOrderId\": \"20141231-155959-abcdef\",\n    \"symbol\": \"btc_krw\",\n    \"orderType\": \"limit\",\n    \"side\": \"buy\",\n    \"timeInForce\": \"gtc\",\n    \"avgPrice\": \"5000\",\n    \"price\": \"5000\",\n    \"qty\": \"10\",\n    \"filledQty\": \"1\",\n    \"filledAmt\": \"5000\",\n    \"createdAt\": 1700000000000,\n    \"lastFilledAt\": 1700000000000,\n    \"status\": \"partiallyFilled\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2d6e220a-8dc1-4fc0-a5d1-59033d125f4d",
+              "name": "Bad request — see the error envelope and error codes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbol",
+                      "value": "btc_krw"
+                    },
+                    {
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "key": "orderId",
+                      "value": "1234"
+                    },
+                    {
+                      "key": "clientOrderId",
+                      "value": "20141231-155959-abcdef"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c7bed4f8-135d-4a4c-b92d-7abe5000ab33",
+              "name": "Missing or invalid API key / signature.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbol",
+                      "value": "btc_krw"
+                    },
+                    {
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "key": "orderId",
+                      "value": "1234"
+                    },
+                    {
+                      "key": "clientOrderId",
+                      "value": "20141231-155959-abcdef"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "851573d0-3984-4f67-914e-ddf40a717e8e",
+              "name": "API key lacks the required permission or the IP is not allowlisted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbol",
+                      "value": "btc_krw"
+                    },
+                    {
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "key": "orderId",
+                      "value": "1234"
+                    },
+                    {
+                      "key": "clientOrderId",
+                      "value": "20141231-155959-abcdef"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "59f3fb83-9a44-4570-b5a6-5a47499e2c46",
+              "name": "Rate limit exceeded. Honor `Retry-After` / the `Ratelimit` reset window.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbol",
+                      "value": "btc_krw"
+                    },
+                    {
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "key": "orderId",
+                      "value": "1234"
+                    },
+                    {
+                      "key": "clientOrderId",
+                      "value": "20141231-155959-abcdef"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "afd80fae-531f-4736-8708-fff90786912d",
+          "name": "Place Order",
+          "request": {
+            "name": "Place Order",
+            "description": {
+              "content": "Place a new order.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "orders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-KAPI-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "symbol",
+                  "value": "<string>",
+                  "description": "(Required) Trading pair."
+                },
+                {
+                  "disabled": false,
+                  "key": "side",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "orderType",
+                  "value": "<string>",
+                  "description": "(Required) `limit` — limit order / `market` — market order / `best` — best bid/offer. The `timeInForce` and `bestNth` parameters must be set."
+                },
+                {
+                  "disabled": false,
+                  "key": "accountSeq",
+                  "value": "<number>",
+                  "description": "Account sequence number. Defaults to 1 (main account)."
+                },
+                {
+                  "disabled": false,
+                  "key": "price",
+                  "value": "<string>",
+                  "description": "order price for a limit order. omit for a market/BBO order."
+                },
+                {
+                  "disabled": false,
+                  "key": "qty",
+                  "value": "<string>",
+                  "description": "order quantity for a limit order and a market/BBO sell order. omit for a market/BBO buy order."
+                },
+                {
+                  "disabled": false,
+                  "key": "amt",
+                  "value": "<string>",
+                  "description": "order amount (purchase amount) for a market/BBO buy order. omit for a limit order and a market/BBO sell order."
+                },
+                {
+                  "disabled": false,
+                  "key": "bestNth",
+                  "value": "<number>",
+                  "description": "Selects the order's price when orderType=`best`. For other types, this parameter must be omitted. - when timeInForce is one of `gtc`,`ioc`,`fok`: Opponent N price level where N is 1 ~ 5. - when timeInForce is `po`: Queue N price level where N is 1 ~ 5."
+                },
+                {
+                  "disabled": false,
+                  "key": "timeInForce",
+                  "value": "<string>",
+                  "description": "Time in Force strategies. Default: - limit order: `gtc` - market order: `ioc` - best bid/offer: no default(Bad Request error if omitted) For market orders, only `ioc` can be entered. `gtc` — Good-Till-Canceled. The order will remain valid until terminated (fully executed or canceled) / `ioc` — Immediate-Or-Cancel. The order will be filled immediately, if can not then will be canceled. (Taker-Only) / `fok` — Fill-Or-Kill. The order will be filled fully, if can not then will be canceled. (Taker-Only) / `po` — Post-Only. If the order would be filled immediately, then will be canceled. (Maker-Only)"
+                },
+                {
+                  "disabled": false,
+                  "key": "clientOrderId",
+                  "value": "<string>",
+                  "description": "User-defined order ID. Even if multiple requests are made with the same `clientOrderId`, it will be processed only once. You can search for the order using `clientOrderId` with the `GET /v2/orders`. Only strings matching the following regex pattern are allowed: `[0-9a-zA-Z.:_-]{1,36}` However, orders with the statuses `expired` or `canceled` cannot be searched by `clientOrderId` or same `clientOrderId` can be reused approximately three days after they have been closed."
+                },
+                {
+                  "disabled": false,
+                  "key": "pp",
+                  "value": "<string>",
+                  "description": "Price protection. Set to `true` to enable the price protection feature. This order will only be executed within the price protection range when matched as a taker. Use the `ppPercent` parameter to change the threshold."
+                },
+                {
+                  "disabled": false,
+                  "key": "ppPercent",
+                  "value": "<string>",
+                  "description": "Threshold(in percent) for the price protection feature. Set an integer between 1 and 100. If the price protection threshold is set to 5, this order will only be executed within 5% of the midpoint price (between the best ask and best bid) when matched as a taker order. Any unfilled quantity will be canceled. If you enable price protection but do not set ppPercent, the default (5) will be used."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "5479af38-f844-4e7f-8d48-1ebd591c87d8",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Trading pair.",
+                        "type": "text/plain"
+                      },
+                      "key": "symbol",
+                      "value": "btc_krw"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "side",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) `limit` — limit order / `market` — market order / `best` — best bid/offer. The `timeInForce` and `bestNth` parameters must be set.",
+                        "type": "text/plain"
+                      },
+                      "key": "orderType",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Account sequence number. Defaults to 1 (main account).",
+                        "type": "text/plain"
+                      },
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "order price for a limit order. omit for a market/BBO order.",
+                        "type": "text/plain"
+                      },
+                      "key": "price",
+                      "value": "250000"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "order quantity for a limit order and a market/BBO sell order. omit for a market/BBO buy order.",
+                        "type": "text/plain"
+                      },
+                      "key": "qty",
+                      "value": "10"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "order amount (purchase amount) for a market/BBO buy order. omit for a limit order and a market/BBO sell order.",
+                        "type": "text/plain"
+                      },
+                      "key": "amt",
+                      "value": "250000"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Selects the order's price when orderType=`best`. For other types, this parameter must be omitted. - when timeInForce is one of `gtc`,`ioc`,`fok`: Opponent N price level where N is 1 ~ 5. - when timeInForce is `po`: Queue N price level where N is 1 ~ 5.",
+                        "type": "text/plain"
+                      },
+                      "key": "bestNth",
+                      "value": "1"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Time in Force strategies. Default: - limit order: `gtc` - market order: `ioc` - best bid/offer: no default(Bad Request error if omitted) For market orders, only `ioc` can be entered. `gtc` — Good-Till-Canceled. The order will remain valid until terminated (fully executed or canceled) / `ioc` — Immediate-Or-Cancel. The order will be filled immediately, if can not then will be canceled. (Taker-Only) / `fok` — Fill-Or-Kill. The order will be filled fully, if can not then will be canceled. (Taker-Only) / `po` — Post-Only. If the order would be filled immediately, then will be canceled. (Maker-Only)",
+                        "type": "text/plain"
+                      },
+                      "key": "timeInForce",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "User-defined order ID. Even if multiple requests are made with the same `clientOrderId`, it will be processed only once. You can search for the order using `clientOrderId` with the `GET /v2/orders`. Only strings matching the following regex pattern are allowed: `[0-9a-zA-Z.:_-]{1,36}` However, orders with the statuses `expired` or `canceled` cannot be searched by `clientOrderId` or same `clientOrderId` can be reused approximately three days after they have been closed.",
+                        "type": "text/plain"
+                      },
+                      "key": "clientOrderId",
+                      "value": "20141231-155959-abcdef"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Price protection. Set to `true` to enable the price protection feature. This order will only be executed within the price protection range when matched as a taker. Use the `ppPercent` parameter to change the threshold.",
+                        "type": "text/plain"
+                      },
+                      "key": "pp",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Threshold(in percent) for the price protection feature. Set an integer between 1 and 100. If the price protection threshold is set to 5, this order will only be executed within 5% of the midpoint price (between the best ask and best bid) when matched as a taker order. Any unfilled quantity will be canceled. If you enable price protection but do not set ppPercent, the default (5) will be used.",
+                        "type": "text/plain"
+                      },
+                      "key": "ppPercent",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"data\": {\n    \"orderId\": 1234\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ebd57fca-87fd-4474-b722-b71280696989",
+              "name": "Bad request — see the error envelope and error codes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Trading pair.",
+                        "type": "text/plain"
+                      },
+                      "key": "symbol",
+                      "value": "btc_krw"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "side",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) `limit` — limit order / `market` — market order / `best` — best bid/offer. The `timeInForce` and `bestNth` parameters must be set.",
+                        "type": "text/plain"
+                      },
+                      "key": "orderType",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Account sequence number. Defaults to 1 (main account).",
+                        "type": "text/plain"
+                      },
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "order price for a limit order. omit for a market/BBO order.",
+                        "type": "text/plain"
+                      },
+                      "key": "price",
+                      "value": "250000"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "order quantity for a limit order and a market/BBO sell order. omit for a market/BBO buy order.",
+                        "type": "text/plain"
+                      },
+                      "key": "qty",
+                      "value": "10"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "order amount (purchase amount) for a market/BBO buy order. omit for a limit order and a market/BBO sell order.",
+                        "type": "text/plain"
+                      },
+                      "key": "amt",
+                      "value": "250000"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Selects the order's price when orderType=`best`. For other types, this parameter must be omitted. - when timeInForce is one of `gtc`,`ioc`,`fok`: Opponent N price level where N is 1 ~ 5. - when timeInForce is `po`: Queue N price level where N is 1 ~ 5.",
+                        "type": "text/plain"
+                      },
+                      "key": "bestNth",
+                      "value": "1"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Time in Force strategies. Default: - limit order: `gtc` - market order: `ioc` - best bid/offer: no default(Bad Request error if omitted) For market orders, only `ioc` can be entered. `gtc` — Good-Till-Canceled. The order will remain valid until terminated (fully executed or canceled) / `ioc` — Immediate-Or-Cancel. The order will be filled immediately, if can not then will be canceled. (Taker-Only) / `fok` — Fill-Or-Kill. The order will be filled fully, if can not then will be canceled. (Taker-Only) / `po` — Post-Only. If the order would be filled immediately, then will be canceled. (Maker-Only)",
+                        "type": "text/plain"
+                      },
+                      "key": "timeInForce",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "User-defined order ID. Even if multiple requests are made with the same `clientOrderId`, it will be processed only once. You can search for the order using `clientOrderId` with the `GET /v2/orders`. Only strings matching the following regex pattern are allowed: `[0-9a-zA-Z.:_-]{1,36}` However, orders with the statuses `expired` or `canceled` cannot be searched by `clientOrderId` or same `clientOrderId` can be reused approximately three days after they have been closed.",
+                        "type": "text/plain"
+                      },
+                      "key": "clientOrderId",
+                      "value": "20141231-155959-abcdef"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Price protection. Set to `true` to enable the price protection feature. This order will only be executed within the price protection range when matched as a taker. Use the `ppPercent` parameter to change the threshold.",
+                        "type": "text/plain"
+                      },
+                      "key": "pp",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Threshold(in percent) for the price protection feature. Set an integer between 1 and 100. If the price protection threshold is set to 5, this order will only be executed within 5% of the midpoint price (between the best ask and best bid) when matched as a taker order. Any unfilled quantity will be canceled. If you enable price protection but do not set ppPercent, the default (5) will be used.",
+                        "type": "text/plain"
+                      },
+                      "key": "ppPercent",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "51407dfc-f240-4eb0-bd4d-d010dc139a40",
+              "name": "Missing or invalid API key / signature.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Trading pair.",
+                        "type": "text/plain"
+                      },
+                      "key": "symbol",
+                      "value": "btc_krw"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "side",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) `limit` — limit order / `market` — market order / `best` — best bid/offer. The `timeInForce` and `bestNth` parameters must be set.",
+                        "type": "text/plain"
+                      },
+                      "key": "orderType",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Account sequence number. Defaults to 1 (main account).",
+                        "type": "text/plain"
+                      },
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "order price for a limit order. omit for a market/BBO order.",
+                        "type": "text/plain"
+                      },
+                      "key": "price",
+                      "value": "250000"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "order quantity for a limit order and a market/BBO sell order. omit for a market/BBO buy order.",
+                        "type": "text/plain"
+                      },
+                      "key": "qty",
+                      "value": "10"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "order amount (purchase amount) for a market/BBO buy order. omit for a limit order and a market/BBO sell order.",
+                        "type": "text/plain"
+                      },
+                      "key": "amt",
+                      "value": "250000"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Selects the order's price when orderType=`best`. For other types, this parameter must be omitted. - when timeInForce is one of `gtc`,`ioc`,`fok`: Opponent N price level where N is 1 ~ 5. - when timeInForce is `po`: Queue N price level where N is 1 ~ 5.",
+                        "type": "text/plain"
+                      },
+                      "key": "bestNth",
+                      "value": "1"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Time in Force strategies. Default: - limit order: `gtc` - market order: `ioc` - best bid/offer: no default(Bad Request error if omitted) For market orders, only `ioc` can be entered. `gtc` — Good-Till-Canceled. The order will remain valid until terminated (fully executed or canceled) / `ioc` — Immediate-Or-Cancel. The order will be filled immediately, if can not then will be canceled. (Taker-Only) / `fok` — Fill-Or-Kill. The order will be filled fully, if can not then will be canceled. (Taker-Only) / `po` — Post-Only. If the order would be filled immediately, then will be canceled. (Maker-Only)",
+                        "type": "text/plain"
+                      },
+                      "key": "timeInForce",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "User-defined order ID. Even if multiple requests are made with the same `clientOrderId`, it will be processed only once. You can search for the order using `clientOrderId` with the `GET /v2/orders`. Only strings matching the following regex pattern are allowed: `[0-9a-zA-Z.:_-]{1,36}` However, orders with the statuses `expired` or `canceled` cannot be searched by `clientOrderId` or same `clientOrderId` can be reused approximately three days after they have been closed.",
+                        "type": "text/plain"
+                      },
+                      "key": "clientOrderId",
+                      "value": "20141231-155959-abcdef"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Price protection. Set to `true` to enable the price protection feature. This order will only be executed within the price protection range when matched as a taker. Use the `ppPercent` parameter to change the threshold.",
+                        "type": "text/plain"
+                      },
+                      "key": "pp",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Threshold(in percent) for the price protection feature. Set an integer between 1 and 100. If the price protection threshold is set to 5, this order will only be executed within 5% of the midpoint price (between the best ask and best bid) when matched as a taker order. Any unfilled quantity will be canceled. If you enable price protection but do not set ppPercent, the default (5) will be used.",
+                        "type": "text/plain"
+                      },
+                      "key": "ppPercent",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "593af006-11c7-4d99-9aaa-d90b425e80f9",
+              "name": "API key lacks the required permission or the IP is not allowlisted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Trading pair.",
+                        "type": "text/plain"
+                      },
+                      "key": "symbol",
+                      "value": "btc_krw"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "side",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) `limit` — limit order / `market` — market order / `best` — best bid/offer. The `timeInForce` and `bestNth` parameters must be set.",
+                        "type": "text/plain"
+                      },
+                      "key": "orderType",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Account sequence number. Defaults to 1 (main account).",
+                        "type": "text/plain"
+                      },
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "order price for a limit order. omit for a market/BBO order.",
+                        "type": "text/plain"
+                      },
+                      "key": "price",
+                      "value": "250000"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "order quantity for a limit order and a market/BBO sell order. omit for a market/BBO buy order.",
+                        "type": "text/plain"
+                      },
+                      "key": "qty",
+                      "value": "10"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "order amount (purchase amount) for a market/BBO buy order. omit for a limit order and a market/BBO sell order.",
+                        "type": "text/plain"
+                      },
+                      "key": "amt",
+                      "value": "250000"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Selects the order's price when orderType=`best`. For other types, this parameter must be omitted. - when timeInForce is one of `gtc`,`ioc`,`fok`: Opponent N price level where N is 1 ~ 5. - when timeInForce is `po`: Queue N price level where N is 1 ~ 5.",
+                        "type": "text/plain"
+                      },
+                      "key": "bestNth",
+                      "value": "1"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Time in Force strategies. Default: - limit order: `gtc` - market order: `ioc` - best bid/offer: no default(Bad Request error if omitted) For market orders, only `ioc` can be entered. `gtc` — Good-Till-Canceled. The order will remain valid until terminated (fully executed or canceled) / `ioc` — Immediate-Or-Cancel. The order will be filled immediately, if can not then will be canceled. (Taker-Only) / `fok` — Fill-Or-Kill. The order will be filled fully, if can not then will be canceled. (Taker-Only) / `po` — Post-Only. If the order would be filled immediately, then will be canceled. (Maker-Only)",
+                        "type": "text/plain"
+                      },
+                      "key": "timeInForce",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "User-defined order ID. Even if multiple requests are made with the same `clientOrderId`, it will be processed only once. You can search for the order using `clientOrderId` with the `GET /v2/orders`. Only strings matching the following regex pattern are allowed: `[0-9a-zA-Z.:_-]{1,36}` However, orders with the statuses `expired` or `canceled` cannot be searched by `clientOrderId` or same `clientOrderId` can be reused approximately three days after they have been closed.",
+                        "type": "text/plain"
+                      },
+                      "key": "clientOrderId",
+                      "value": "20141231-155959-abcdef"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Price protection. Set to `true` to enable the price protection feature. This order will only be executed within the price protection range when matched as a taker. Use the `ppPercent` parameter to change the threshold.",
+                        "type": "text/plain"
+                      },
+                      "key": "pp",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Threshold(in percent) for the price protection feature. Set an integer between 1 and 100. If the price protection threshold is set to 5, this order will only be executed within 5% of the midpoint price (between the best ask and best bid) when matched as a taker order. Any unfilled quantity will be canceled. If you enable price protection but do not set ppPercent, the default (5) will be used.",
+                        "type": "text/plain"
+                      },
+                      "key": "ppPercent",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4ac13af0-673c-40f3-a26b-745730dd02bf",
+              "name": "Rate limit exceeded. Honor `Retry-After` / the `Ratelimit` reset window.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Trading pair.",
+                        "type": "text/plain"
+                      },
+                      "key": "symbol",
+                      "value": "btc_krw"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "side",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) `limit` — limit order / `market` — market order / `best` — best bid/offer. The `timeInForce` and `bestNth` parameters must be set.",
+                        "type": "text/plain"
+                      },
+                      "key": "orderType",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Account sequence number. Defaults to 1 (main account).",
+                        "type": "text/plain"
+                      },
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "order price for a limit order. omit for a market/BBO order.",
+                        "type": "text/plain"
+                      },
+                      "key": "price",
+                      "value": "250000"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "order quantity for a limit order and a market/BBO sell order. omit for a market/BBO buy order.",
+                        "type": "text/plain"
+                      },
+                      "key": "qty",
+                      "value": "10"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "order amount (purchase amount) for a market/BBO buy order. omit for a limit order and a market/BBO sell order.",
+                        "type": "text/plain"
+                      },
+                      "key": "amt",
+                      "value": "250000"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Selects the order's price when orderType=`best`. For other types, this parameter must be omitted. - when timeInForce is one of `gtc`,`ioc`,`fok`: Opponent N price level where N is 1 ~ 5. - when timeInForce is `po`: Queue N price level where N is 1 ~ 5.",
+                        "type": "text/plain"
+                      },
+                      "key": "bestNth",
+                      "value": "1"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Time in Force strategies. Default: - limit order: `gtc` - market order: `ioc` - best bid/offer: no default(Bad Request error if omitted) For market orders, only `ioc` can be entered. `gtc` — Good-Till-Canceled. The order will remain valid until terminated (fully executed or canceled) / `ioc` — Immediate-Or-Cancel. The order will be filled immediately, if can not then will be canceled. (Taker-Only) / `fok` — Fill-Or-Kill. The order will be filled fully, if can not then will be canceled. (Taker-Only) / `po` — Post-Only. If the order would be filled immediately, then will be canceled. (Maker-Only)",
+                        "type": "text/plain"
+                      },
+                      "key": "timeInForce",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "User-defined order ID. Even if multiple requests are made with the same `clientOrderId`, it will be processed only once. You can search for the order using `clientOrderId` with the `GET /v2/orders`. Only strings matching the following regex pattern are allowed: `[0-9a-zA-Z.:_-]{1,36}` However, orders with the statuses `expired` or `canceled` cannot be searched by `clientOrderId` or same `clientOrderId` can be reused approximately three days after they have been closed.",
+                        "type": "text/plain"
+                      },
+                      "key": "clientOrderId",
+                      "value": "20141231-155959-abcdef"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Price protection. Set to `true` to enable the price protection feature. This order will only be executed within the price protection range when matched as a taker. Use the `ppPercent` parameter to change the threshold.",
+                        "type": "text/plain"
+                      },
+                      "key": "pp",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Threshold(in percent) for the price protection feature. Set an integer between 1 and 100. If the price protection threshold is set to 5, this order will only be executed within 5% of the midpoint price (between the best ask and best bid) when matched as a taker order. Any unfilled quantity will be canceled. If you enable price protection but do not set ppPercent, the default (5) will be used.",
+                        "type": "text/plain"
+                      },
+                      "key": "ppPercent",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "14c5ab5f-5feb-4393-8374-0338da961f82",
+          "name": "Cancel Order",
+          "request": {
+            "name": "Cancel Order",
+            "description": {
+              "content": "Requests to cancel an open order.\nIf the API call is successful, the cancel request is accepted and the order will be canceled soon.\nIf the error code is one of `ORDER_ALREADY_CANCELED`, `ORDER_ALREADY_FILLED`, or `ORDER_ALREADY_EXPIRED`, it means the order has been already been closed.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "orders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "symbol",
+                  "value": "<string>",
+                  "description": "(Required) Trading pair."
+                },
+                {
+                  "disabled": false,
+                  "key": "accountSeq",
+                  "value": "<number>",
+                  "description": "Account sequence number. Defaults to 1 (main account)."
+                },
+                {
+                  "disabled": false,
+                  "key": "orderId",
+                  "value": "<number>",
+                  "description": "`orderId` responsed in `POST /v2/orders`. You must choose to enter either `orderId` or `clientOrderId`."
+                },
+                {
+                  "disabled": false,
+                  "key": "clientOrderId",
+                  "value": "<string>",
+                  "description": "`clientOrderId` which is a user-defined order ID requested in `POST /v2/orders`. You must choose to enter either `orderId` or `clientOrderId`."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-KAPI-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c128cafc-d709-4480-b4dd-bf4207c0aba9",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbol",
+                      "value": "btc_krw"
+                    },
+                    {
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "key": "orderId",
+                      "value": "1234"
+                    },
+                    {
+                      "key": "clientOrderId",
+                      "value": "20141231-155959-abcdef"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "122fb290-bc4c-45c9-9159-c39d6952be75",
+              "name": "Bad request — see the error envelope and error codes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbol",
+                      "value": "btc_krw"
+                    },
+                    {
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "key": "orderId",
+                      "value": "1234"
+                    },
+                    {
+                      "key": "clientOrderId",
+                      "value": "20141231-155959-abcdef"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "31b5ed97-6717-405d-9294-bfb07b407043",
+              "name": "Missing or invalid API key / signature.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbol",
+                      "value": "btc_krw"
+                    },
+                    {
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "key": "orderId",
+                      "value": "1234"
+                    },
+                    {
+                      "key": "clientOrderId",
+                      "value": "20141231-155959-abcdef"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3cbf3c0a-d137-46e2-8419-b62e067daaf6",
+              "name": "API key lacks the required permission or the IP is not allowlisted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbol",
+                      "value": "btc_krw"
+                    },
+                    {
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "key": "orderId",
+                      "value": "1234"
+                    },
+                    {
+                      "key": "clientOrderId",
+                      "value": "20141231-155959-abcdef"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a6e9d1bf-70ad-4851-bc0e-a1329a507409",
+              "name": "Rate limit exceeded. Honor `Retry-After` / the `Ratelimit` reset window.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbol",
+                      "value": "btc_krw"
+                    },
+                    {
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "key": "orderId",
+                      "value": "1234"
+                    },
+                    {
+                      "key": "clientOrderId",
+                      "value": "20141231-155959-abcdef"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "da206e35-a61e-4e1c-a7fc-8d713d2ab50c",
+          "name": "Get Open Orders",
+          "request": {
+            "name": "Get Open Orders",
+            "description": {
+              "content": "Query the list of open orders for a single trading pair. Only orders with the status `open` or `partiallyFilled` are queried.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "openOrders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "symbol",
+                  "value": "<string>",
+                  "description": "(Required) Trading pair."
+                },
+                {
+                  "disabled": false,
+                  "key": "accountSeq",
+                  "value": "<number>",
+                  "description": "Account sequence number. Defaults to 1 (main account)."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<number>",
+                  "description": "Number of queries (range: 1 to 1000). Default is 500."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-KAPI-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d67fc5f6-6320-4563-b40f-68b160feb361",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "openOrders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbol",
+                      "value": "btc_krw"
+                    },
+                    {
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"data\": [\n    {\n      \"orderId\": 1234,\n      \"orderType\": \"limit\",\n      \"side\": \"buy\",\n      \"avgPrice\": \"5000\",\n      \"price\": \"5000\",\n      \"qty\": \"10\",\n      \"filledQty\": \"1\",\n      \"filledAmt\": \"5000\",\n      \"createdAt\": 1700000000000,\n      \"lastFilledAt\": 1700000000000,\n      \"status\": \"partiallyFilled\"\n    },\n    {\n      \"orderId\": 1235,\n      \"orderType\": \"limit\",\n      \"side\": \"sell\",\n      \"price\": \"5000\",\n      \"qty\": \"10\",\n      \"filledQty\": \"0\",\n      \"filledAmt\": \"0\",\n      \"createdAt\": 1700000000000,\n      \"status\": \"open\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "611e67c7-244f-4955-9305-9b8988c2d05c",
+              "name": "Bad request — see the error envelope and error codes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "openOrders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbol",
+                      "value": "btc_krw"
+                    },
+                    {
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "526a53e6-7673-44db-bdf3-3a11f41aa3ea",
+              "name": "Missing or invalid API key / signature.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "openOrders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbol",
+                      "value": "btc_krw"
+                    },
+                    {
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8fcf7fbc-1cdc-40c9-b76c-a357799ed890",
+              "name": "API key lacks the required permission or the IP is not allowlisted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "openOrders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbol",
+                      "value": "btc_krw"
+                    },
+                    {
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "657729e5-aa35-4b29-9b31-9ed94f17b294",
+              "name": "Rate limit exceeded. Honor `Retry-After` / the `Ratelimit` reset window.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "openOrders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbol",
+                      "value": "btc_krw"
+                    },
+                    {
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f9f5cf03-af73-40f7-971d-13f166f2b378",
+          "name": "Get All Orders",
+          "request": {
+            "name": "Get All Orders",
+            "description": {
+              "content": "Query the recent order list for a single trading pair. Only orders created within 36 hours can be queried.\nThis API is for checking order history, and the information provided may have a delay of a few seconds.\nIf you need current information without delay, please use the `/v2/openOrders` or `/v2/orders` API.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "allOrders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "symbol",
+                  "value": "<string>",
+                  "description": "(Required) Trading pair."
+                },
+                {
+                  "disabled": false,
+                  "key": "accountSeq",
+                  "value": "<number>",
+                  "description": "Account sequence number. Defaults to 1 (main account)."
+                },
+                {
+                  "disabled": false,
+                  "key": "startTime",
+                  "value": "<number>",
+                  "description": "Query start time. Inclusive: a record at exactly this time is returned. Only data up to 36 hours prior to the current time can be queried. If not set, the query will retrieve data from 36 hours ago by default."
+                },
+                {
+                  "disabled": false,
+                  "key": "endTime",
+                  "value": "<number>",
+                  "description": "Query end time. Exclusive: a record at exactly this time is not returned. If not set, data is retrieved up to the current time. Results are newest-first and capped at limit; to retrieve more, narrow the range with startTime/endTime."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<number>",
+                  "description": "Maximum number of queries (range: 1 to 1000). Default is 500."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-KAPI-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "41565d2e-5df8-41ff-9386-eeb29ed05fda",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "allOrders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbol",
+                      "value": "btc_krw"
+                    },
+                    {
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"data\": [\n    {\n      \"orderId\": 1234,\n      \"clientOrderId\": \"20141231-155959-abcdef\",\n      \"symbol\": \"btc_krw\",\n      \"orderType\": \"limit\",\n      \"side\": \"buy\",\n      \"timeInForce\": \"gtc\",\n      \"avgPrice\": \"5000\",\n      \"price\": \"5000\",\n      \"qty\": \"10\",\n      \"filledQty\": \"1\",\n      \"filledAmt\": \"5000\",\n      \"createdAt\": 1700000000000,\n      \"lastFilledAt\": 1700000000000,\n      \"status\": \"partiallyFilled\"\n    },\n    {\n      \"orderId\": 1235,\n      \"clientOrderId\": \"20141231-155959-abcdeg\",\n      \"symbol\": \"btc_krw\",\n      \"orderType\": \"limit\",\n      \"side\": \"sell\",\n      \"timeInForce\": \"gtc\",\n      \"price\": \"5000\",\n      \"qty\": \"10\",\n      \"filledQty\": \"0\",\n      \"filledAmt\": \"0\",\n      \"createdAt\": 1700000000000,\n      \"lastFilledAt\": 1700000000000,\n      \"status\": \"open\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b6135081-0598-490d-a60c-cd65acdb3ba2",
+              "name": "Bad request — see the error envelope and error codes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "allOrders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbol",
+                      "value": "btc_krw"
+                    },
+                    {
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3c3ccf6d-dd76-4da1-8aeb-b3e0310e5c61",
+              "name": "Missing or invalid API key / signature.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "allOrders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbol",
+                      "value": "btc_krw"
+                    },
+                    {
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ada3d83e-9992-4484-92e3-2a66b877c63b",
+              "name": "API key lacks the required permission or the IP is not allowlisted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "allOrders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbol",
+                      "value": "btc_krw"
+                    },
+                    {
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4aebba5f-c0cf-4123-8dd6-06feddc1c4d8",
+              "name": "Rate limit exceeded. Honor `Retry-After` / the `Ratelimit` reset window.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "allOrders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbol",
+                      "value": "btc_krw"
+                    },
+                    {
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a007bfb9-9bd3-4c07-ae46-6239aa570b31",
+          "name": "Get Recent Trades",
+          "request": {
+            "name": "Get Recent Trades",
+            "description": {
+              "content": "Query the recent trades list for a single trading pair. Only trade history from the past 36 hours can be queried.\nThis API is for checking trade history, and the information provided may have a delay of a few seconds.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "myTrades"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "symbol",
+                  "value": "<string>",
+                  "description": "(Required) Trading pair."
+                },
+                {
+                  "disabled": false,
+                  "key": "accountSeq",
+                  "value": "<number>",
+                  "description": "Account sequence number. Defaults to 1 (main account)."
+                },
+                {
+                  "disabled": false,
+                  "key": "startTime",
+                  "value": "<number>",
+                  "description": "Query start time. Inclusive: a record at exactly this time is returned. Only data up to 36 hours prior to the current time can be queried. If not set, the query will retrieve data from 36 hours ago by default."
+                },
+                {
+                  "disabled": false,
+                  "key": "endTime",
+                  "value": "<number>",
+                  "description": "Query end time. Exclusive: a record at exactly this time is not returned. If not set, data is retrieved up to the current time. Results are newest-first and capped at limit; to retrieve more, narrow the range with startTime/endTime."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<number>",
+                  "description": "Maximum number of queries (range: 1 to 1000). Default is 500."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-KAPI-KEY"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "28b2e4af-9dea-4bc1-9da1-0577bf8e4377",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "myTrades"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbol",
+                      "value": "btc_krw"
+                    },
+                    {
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"data\": [\n    {\n      \"symbol\": \"btc_krw\",\n      \"tradeId\": 52,\n      \"orderId\": 382312,\n      \"side\": \"buy\",\n      \"price\": \"5000\",\n      \"qty\": \"10\",\n      \"amt\": \"50000\",\n      \"tradedAt\": 1700000000000,\n      \"isTaker\": true,\n      \"feeCurrency\": \"krw\",\n      \"feeQty\": \"50\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "475e2ea8-7e30-4e14-b784-3d777b36c6c9",
+              "name": "Bad request — see the error envelope and error codes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "myTrades"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbol",
+                      "value": "btc_krw"
+                    },
+                    {
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3cdcc7d8-01ff-4c67-ae3b-d701f4e00115",
+              "name": "Missing or invalid API key / signature.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "myTrades"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbol",
+                      "value": "btc_krw"
+                    },
+                    {
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5f4bdd2e-7ba7-4098-9128-c4989cb9464e",
+              "name": "API key lacks the required permission or the IP is not allowlisted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "myTrades"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbol",
+                      "value": "btc_krw"
+                    },
+                    {
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7102acfb-f436-4643-bc64-71a0ee983b94",
+              "name": "Rate limit exceeded. Honor `Retry-After` / the `Ratelimit` reset window.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "myTrades"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbol",
+                      "value": "btc_krw"
+                    },
+                    {
+                      "key": "accountSeq",
+                      "value": "1"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-KAPI-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": {\n    \"message\": \"NO_BALANCE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.korbit.co.kr",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "d3c117f2-6f37-4b95-bb35-b67c804aa720",
+    "name": "Korbit Open API v2 Asset Trading API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for the Korbit cryptocurrency exchange (Korea's first virtual-asset exchange). Covers market data (quotation), trading, balances, crypto deposits and withdrawals, and KRW deposit/withdrawal push notifications.\n\nAll responses use the envelope `{\"success\": true, \"data\": ...}`; errors use `{\"success\": false, \"error\": {\"message\": \"<CODE>\"}}`.\n\nPrivate endpoints require the `X-KAPI-KEY` header plus `timestamp` and `signature` parameters. Signatures are HMAC-SHA256 (hex) or ED25519 (Base64, URL-encoded) over the exact encoded request string. See the timestamp-window rules: `recvWindow` defaults to 5000 ms, maximum 60000 ms, and the future bound is a fixed +1000 ms.\n\nThis document was generated by the API Evangelist enrichment pipeline from Korbit's own published agent documentation bundle (https://docs.korbit.co.kr/llms-full.txt). Korbit does not publish an OpenAPI document; this is a faithful transcription of the published reference, not an official artifact.\n\nContact Support:\n Name: Korbit Developers",
+      "type": "text/plain"
+    }
+  }
+}

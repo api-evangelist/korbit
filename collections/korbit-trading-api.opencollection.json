@@ -1,0 +1,309 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Korbit Open API v2 Asset Trading API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Trading",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.korbit.co.kr/v2/orders",
+            "params": [
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "query",
+                "description": "Trading pair."
+              },
+              {
+                "name": "accountSeq",
+                "value": "",
+                "type": "query",
+                "description": "Account sequence number. Defaults to 1 (main account)."
+              },
+              {
+                "name": "orderId",
+                "value": "",
+                "type": "query",
+                "description": "Enter `orderID` (responsed by POST /v2/orders). Enter one of `orderID` or `clientOrderId`."
+              },
+              {
+                "name": "clientOrderId",
+                "value": "",
+                "type": "query",
+                "description": "Enter `clientOrderId` (requested by POST /v2/orders). Enter one of `orderID` or `clientOrderId`."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-KAPI-KEY",
+              "value": "{{X-KAPI-KEY}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Use either `orderId` or `clientOrderId` to query the status of an individual order.\nHowever, orders with the statuses `expired` or `canceled` cannot be retrieved approximately 3 days after they have been closed."
+        },
+        {
+          "info": {
+            "name": "Place Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.korbit.co.kr/v2/orders",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "symbol",
+                  "value": ""
+                },
+                {
+                  "name": "accountSeq",
+                  "value": ""
+                },
+                {
+                  "name": "side",
+                  "value": ""
+                },
+                {
+                  "name": "price",
+                  "value": ""
+                },
+                {
+                  "name": "qty",
+                  "value": ""
+                },
+                {
+                  "name": "amt",
+                  "value": ""
+                },
+                {
+                  "name": "orderType",
+                  "value": ""
+                },
+                {
+                  "name": "bestNth",
+                  "value": ""
+                },
+                {
+                  "name": "timeInForce",
+                  "value": ""
+                },
+                {
+                  "name": "clientOrderId",
+                  "value": ""
+                },
+                {
+                  "name": "pp",
+                  "value": ""
+                },
+                {
+                  "name": "ppPercent",
+                  "value": ""
+                }
+              ]
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "X-KAPI-KEY",
+              "value": "{{X-KAPI-KEY}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Place a new order."
+        },
+        {
+          "info": {
+            "name": "Cancel Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.korbit.co.kr/v2/orders",
+            "params": [
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "query",
+                "description": "Trading pair."
+              },
+              {
+                "name": "accountSeq",
+                "value": "",
+                "type": "query",
+                "description": "Account sequence number. Defaults to 1 (main account)."
+              },
+              {
+                "name": "orderId",
+                "value": "",
+                "type": "query",
+                "description": "`orderId` responsed in `POST /v2/orders`. You must choose to enter either `orderId` or `clientOrderId`."
+              },
+              {
+                "name": "clientOrderId",
+                "value": "",
+                "type": "query",
+                "description": "`clientOrderId` which is a user-defined order ID requested in `POST /v2/orders`. You must choose to enter either `orderId` or `clientOrderId`."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-KAPI-KEY",
+              "value": "{{X-KAPI-KEY}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Requests to cancel an open order.\nIf the API call is successful, the cancel request is accepted and the order will be canceled soon.\nIf the error code is one of `ORDER_ALREADY_CANCELED`, `ORDER_ALREADY_FILLED`, or `ORDER_ALREADY_EXPIRED`, it means the order has been already been closed."
+        },
+        {
+          "info": {
+            "name": "Get Open Orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.korbit.co.kr/v2/openOrders",
+            "params": [
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "query",
+                "description": "Trading pair."
+              },
+              {
+                "name": "accountSeq",
+                "value": "",
+                "type": "query",
+                "description": "Account sequence number. Defaults to 1 (main account)."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of queries (range: 1 to 1000). Default is 500."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-KAPI-KEY",
+              "value": "{{X-KAPI-KEY}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Query the list of open orders for a single trading pair. Only orders with the status `open` or `partiallyFilled` are queried."
+        },
+        {
+          "info": {
+            "name": "Get All Orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.korbit.co.kr/v2/allOrders",
+            "params": [
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "query",
+                "description": "Trading pair."
+              },
+              {
+                "name": "accountSeq",
+                "value": "",
+                "type": "query",
+                "description": "Account sequence number. Defaults to 1 (main account)."
+              },
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "Query start time. Inclusive: a record at exactly this time is returned. Only data up to 36 hours prior to the current time can be queried. If not set, the query will retrieve data from 36 hours ago by default."
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "Query end time. Exclusive: a record at exactly this time is not returned. If not set, data is retrieved up to the current time. Results are newest-first and capped at limit; to retrieve more, narrow the range with startTime/endTime."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of queries (range: 1 to 1000). Default is 500."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-KAPI-KEY",
+              "value": "{{X-KAPI-KEY}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Query the recent order list for a single trading pair. Only orders created within 36 hours can be queried.\nThis API is for checking order history, and the information provided may have a delay of a few seconds.\nIf you need current information without delay, please use the `/v2/openOrders` or `/v2/orders` API."
+        },
+        {
+          "info": {
+            "name": "Get Recent Trades",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.korbit.co.kr/v2/myTrades",
+            "params": [
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "query",
+                "description": "Trading pair."
+              },
+              {
+                "name": "accountSeq",
+                "value": "",
+                "type": "query",
+                "description": "Account sequence number. Defaults to 1 (main account)."
+              },
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "Query start time. Inclusive: a record at exactly this time is returned. Only data up to 36 hours prior to the current time can be queried. If not set, the query will retrieve data from 36 hours ago by default."
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "Query end time. Exclusive: a record at exactly this time is not returned. If not set, data is retrieved up to the current time. Results are newest-first and capped at limit; to retrieve more, narrow the range with startTime/endTime."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of queries (range: 1 to 1000). Default is 500."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-KAPI-KEY",
+              "value": "{{X-KAPI-KEY}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Query the recent trades list for a single trading pair. Only trade history from the past 36 hours can be queried.\nThis API is for checking trade history, and the information provided may have a delay of a few seconds."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

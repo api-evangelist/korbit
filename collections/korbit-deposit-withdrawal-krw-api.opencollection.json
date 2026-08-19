@@ -1,0 +1,146 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Korbit Open API v2 Asset Deposit/Withdrawal (KRW) API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Deposit/Withdrawal (KRW)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Request Deposit",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.korbit.co.kr/v2/krw/sendKrwDepositPush",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "accountSeq",
+                  "value": ""
+                },
+                {
+                  "name": "amount",
+                  "value": ""
+                }
+              ]
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "X-KAPI-KEY",
+              "value": "{{X-KAPI-KEY}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Send a notification for KRW deposit requests to your Korbit mobile app. \nAfter receiving the notification, you must complete the verification process for the deposit to proceed.\nTo receive notifications, ensure that push notifications are enabled in the app settings."
+        },
+        {
+          "info": {
+            "name": "Request Withdrawal",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.korbit.co.kr/v2/krw/sendKrwWithdrawalPush",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "accountSeq",
+                  "value": ""
+                },
+                {
+                  "name": "amount",
+                  "value": ""
+                }
+              ]
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "X-KAPI-KEY",
+              "value": "{{X-KAPI-KEY}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Send a notification for KRW withdrawal requests to your Korbit mobile app. \nAfter receiving the notification, you must complete the verification process for the withdrawal to proceed.\nTo receive notifications, ensure that push notifications are enabled in the app settings."
+        },
+        {
+          "info": {
+            "name": "Get Recent Deposits",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.korbit.co.kr/v2/krw/recentDeposits",
+            "params": [
+              {
+                "name": "accountSeq",
+                "value": "",
+                "type": "query",
+                "description": "Account sequence number. Deposit/withdrawal APIs only operate on the main account, so only `1` is accepted. Defaults to 1."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of queries (range: 1 to 100)."
+              },
+              {
+                "name": "includeAll",
+                "value": "",
+                "type": "query",
+                "description": "Retrieve all transaction history. `false` — Only regular KRW deposits (default) / `true` — Includes additional items such as deposit fees, event rewards, etc."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-KAPI-KEY",
+              "value": "{{X-KAPI-KEY}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get recent KRW deposit history."
+        },
+        {
+          "info": {
+            "name": "Get Recent Withdrawals",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.korbit.co.kr/v2/krw/recentWithdrawals",
+            "params": [
+              {
+                "name": "accountSeq",
+                "value": "",
+                "type": "query",
+                "description": "Account sequence number. Deposit/withdrawal APIs only operate on the main account, so only `1` is accepted. Defaults to 1."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of queries (Range: 1 to 100)."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-KAPI-KEY",
+              "value": "{{X-KAPI-KEY}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get recent KRW withdrawal history."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

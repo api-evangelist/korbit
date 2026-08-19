@@ -1,0 +1,188 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Korbit Open API v2 Asset Withdrawal (Crypto) API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Withdrawal (Crypto)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.korbit.co.kr/v2/coin/withdrawableAddresses",
+            "params": [
+              {
+                "name": "accountSeq",
+                "value": "",
+                "type": "query",
+                "description": "Account sequence number. Deposit/withdrawal APIs only operate on the main account, so only `1` is accepted. Defaults to 1."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-KAPI-KEY",
+              "value": "{{X-KAPI-KEY}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve the list of addresses registered for API withdrawals."
+        },
+        {
+          "info": {
+            "name": "Get Withdrawable Amount",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.korbit.co.kr/v2/coin/withdrawableAmount",
+            "params": [
+              {
+                "name": "accountSeq",
+                "value": "",
+                "type": "query",
+                "description": "Account sequence number. Deposit/withdrawal APIs only operate on the main account, so only `1` is accepted. Defaults to 1."
+              },
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "Symbol of the cryptocurrency to query. If not provided, all assets will be queried."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-KAPI-KEY",
+              "value": "{{X-KAPI-KEY}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get the available cryptocurrency withdrawal amount."
+        },
+        {
+          "info": {
+            "name": "Get Withdrawal Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.korbit.co.kr/v2/coin/withdrawal",
+            "params": [
+              {
+                "name": "accountSeq",
+                "value": "",
+                "type": "query",
+                "description": "Account sequence number. Deposit/withdrawal APIs only operate on the main account, so only `1` is accepted. Defaults to 1."
+              },
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "symbol of the asset."
+              },
+              {
+                "name": "coinWithdrawalId",
+                "value": "",
+                "type": "query",
+                "description": "withdrawal ID."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-KAPI-KEY",
+              "value": "{{X-KAPI-KEY}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get the status of the requested withdrawal."
+        },
+        {
+          "info": {
+            "name": "Request Withdrawal",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.korbit.co.kr/v2/coin/withdrawal",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "accountSeq",
+                  "value": ""
+                },
+                {
+                  "name": "currency",
+                  "value": ""
+                },
+                {
+                  "name": "network",
+                  "value": ""
+                },
+                {
+                  "name": "amount",
+                  "value": ""
+                },
+                {
+                  "name": "address",
+                  "value": ""
+                },
+                {
+                  "name": "secondaryAddress",
+                  "value": ""
+                }
+              ]
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "X-KAPI-KEY",
+              "value": "{{X-KAPI-KEY}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Request for cryptocurrency withdrawal. You need to register your withdrawal addresses for use with API in order to use this feature."
+        },
+        {
+          "info": {
+            "name": "Cancel Withdrawal",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.korbit.co.kr/v2/coin/withdrawal",
+            "params": [
+              {
+                "name": "accountSeq",
+                "value": "",
+                "type": "query",
+                "description": "Account sequence number. Deposit/withdrawal APIs only operate on the main account, so only `1` is accepted. Defaults to 1."
+              },
+              {
+                "name": "coinWithdrawalId",
+                "value": "",
+                "type": "query",
+                "description": "withdrawal ID (responsed by `POST /v2/coin/withdrawal`)."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-KAPI-KEY",
+              "value": "{{X-KAPI-KEY}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Cancel a cryptocurrency withdrawal.\nWithdrawals can only be canceled if the status is one of the following:\n- `actionRequired`\n- `reviewing`"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

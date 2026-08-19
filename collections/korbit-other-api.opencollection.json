@@ -1,0 +1,184 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Korbit Open API v2 Asset Other API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Other",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Recent Deposits",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.korbit.co.kr/v2/coin/recentDeposits",
+            "params": [
+              {
+                "name": "accountSeq",
+                "value": "",
+                "type": "query",
+                "description": "Account sequence number. Deposit/withdrawal APIs only operate on the main account, so only `1` is accepted. Defaults to 1."
+              },
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "symbol of the asset."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of queries (range: 1 to 100)."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-KAPI-KEY",
+              "value": "{{X-KAPI-KEY}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get recent deposit history."
+        },
+        {
+          "info": {
+            "name": "Get Recent Withdrawals",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.korbit.co.kr/v2/coin/recentWithdrawals",
+            "params": [
+              {
+                "name": "accountSeq",
+                "value": "",
+                "type": "query",
+                "description": "Account sequence number. Deposit/withdrawal APIs only operate on the main account, so only `1` is accepted. Defaults to 1."
+              },
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "symbol of the asset."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of queries (Range: 1 to 100)."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-KAPI-KEY",
+              "value": "{{X-KAPI-KEY}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get recent cryptocurrency withdrawal history."
+        },
+        {
+          "info": {
+            "name": "Get Crypto Info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.korbit.co.kr/v2/currencies"
+          },
+          "docs": "Get cryptocurrencies information."
+        },
+        {
+          "info": {
+            "name": "Get Server Time",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.korbit.co.kr/v2/time"
+          },
+          "docs": "Get the current server time."
+        },
+        {
+          "info": {
+            "name": "Get Trading Fee Rates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.korbit.co.kr/v2/tradingFeePolicy",
+            "params": [
+              {
+                "name": "accountSeq",
+                "value": "",
+                "type": "query",
+                "description": "Account sequence number. Defaults to 1 (main account)."
+              },
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "query",
+                "description": "Enter the symbols of the trading pairs to query. To input multiple trading pairs, separate them with commas(,). If omitted, information for all available trading pairs on Korbit will be returned."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-KAPI-KEY",
+              "value": "{{X-KAPI-KEY}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get the trading fee rates applied to your account."
+        },
+        {
+          "info": {
+            "name": "Get API Key Info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.korbit.co.kr/v2/currentKeyInfo",
+            "auth": {
+              "type": "apikey",
+              "key": "X-KAPI-KEY",
+              "value": "{{X-KAPI-KEY}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get current API Key's information."
+        },
+        {
+          "info": {
+            "name": "Get Notices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.korbit.co.kr/v2/notices"
+          },
+          "docs": "Get the 20 most recent Korbit notices (announcements), most recent first.\nIncludes both general Korbit notices and Open API (developer center) notices."
+        },
+        {
+          "info": {
+            "name": "Get Market Alerts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.korbit.co.kr/v2/marketAlerts"
+          },
+          "docs": "Get the current market alert (Market Warning System, 시장경보제) status for each trading pair. Returns only pairs that currently have active alerts."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
