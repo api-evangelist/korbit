@@ -38,6 +38,17 @@ tags:
 - Digital Assets
 - Trading
 - Market Data
+- Financial-Services
+- WebSocket
+- South Korea
+- Blockchain
+tags_raw:
+- Company
+- Crypto
+- Cryptocurrency Exchange
+- Digital Assets
+- Trading
+- Market Data
 - Financial Services
 - WebSocket
 - South Korea
@@ -103,7 +114,8 @@ apis:
   description: The Other API from Korbit — 8 operation(s) for other.
   humanURL: https://docs.korbit.co.kr/
   baseURL: https://api.korbit.co.kr
-  tags:
+  tags: []
+  tags_raw:
   - Other
   properties:
   - type: OpenAPI
