@@ -176,6 +176,9 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: CapabilityMap
+  url: capabilities/korbit-capability-edges.yml
+  name: Korbit Business Capability Map
 - type: DomainSecurity
   url: security/korbit-domain-security.yml
 - type: AgenticAccess
