@@ -11,6 +11,18 @@ description: 'Korbit is South Korea''s first cryptocurrency exchange, founded in
   CLI with a bundled MCP server and Agent Skill, a documented llms.txt, and a downloadable local
   sandbox that mocks the full REST and WebSocket surface for no-risk development.'
 url: https://raw.githubusercontent.com/api-evangelist/korbit/refs/heads/main/apis.yml
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: self-serve
