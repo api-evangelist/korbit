@@ -1,13 +1,7 @@
 {
   "provider": "korbit",
   "sources": [
-    "korbit-asset-api-openapi.yml",
-    "korbit-deposit-crypto-api-openapi.yml",
-    "korbit-deposit-withdrawal-krw-api-openapi.yml",
-    "korbit-other-api-openapi.yml",
-    "korbit-quotation-api-openapi.yml",
-    "korbit-trading-api-openapi.yml",
-    "korbit-withdrawal-crypto-api-openapi.yml"
+    "_original/korbit-openapi.yml"
   ],
   "outputs": [
     "korbit-asset-api-openapi.yml",
@@ -21,6 +15,18 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "korbit-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "korbit-asset-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "korbit-deposit-crypto-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "korbit-deposit-withdrawal-krw-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "korbit-other-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "korbit-quotation-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "korbit-trading-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "korbit-withdrawal-crypto-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
