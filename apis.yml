@@ -53,10 +53,11 @@ tags:
 - Digital Assets
 - Trading
 - Market Data
-- Financial-Services
+- Financial Services
 - WebSocket
 - South Korea
 - Blockchain
+- Real-Time
 tags_raw:
 - Company
 - Crypto
@@ -68,6 +69,8 @@ tags_raw:
 - WebSocket
 - South Korea
 - Blockchain
+- Financial-Services
+- Real-Time
 apis:
 - aid: korbit:korbit-open-api-v2-websocket
   name: Korbit Open API v2 WebSocket
